@@ -2,12 +2,10 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-<<<<<<< HEAD
 import java.util.ArrayList;
-=======
 import java.sql.DriverManager;
 import java.util.List;
->>>>>>> ad6e3357c5842e89e69cf8ee920ee1bfd753e214
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -20,11 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Category;
 
-<<<<<<< HEAD
-import com.sun.xml.bind.v2.schemagen.xmlschema.List;
 
-=======
->>>>>>> ad6e3357c5842e89e69cf8ee920ee1bfd753e214
+import facades.CategoriesFacade;
+
 /**
  * Servlet implementation class TestServlet
  */
@@ -44,35 +40,11 @@ public class HomeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-<<<<<<< HEAD
 		// TODO Auto-generated method stub
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("ShareSomething");
-
-		EntityManager em = entityManagerFactory.createEntityManager();
-		em.getTransaction().begin();
-		Category[] v = (Category[]) em.createQuery("FROM categories", Category.class).getResultList().toArray();
-		for (Category c : v) {
-		System.out.println(c.getName());
-		}
-		em.getTransaction().commit();
-		em.close();
-
-=======
-
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("ShareSomething");
 		
-		EntityManager em = entityManagerFactory.createEntityManager();
-		em.getTransaction().begin();
-		List<Category> l = em.createQuery("FROM categories", Category.class).getResultList();
-		for (Category c : l) {
-			System.out.println(c.getName());
-		}
-		em.getTransaction().commit();
-		em.close();
-		
-		request.setAttribute("categories", l);
->>>>>>> ad6e3357c5842e89e69cf8ee920ee1bfd753e214
-		
+		CategoriesFacade catf = new CategoriesFacade();
+		List<Category> list_categories = catf.getCategories();
+		request.setAttribute("categories", list_categories);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 		
 	}
@@ -83,16 +55,13 @@ public class HomeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("ShareSomething");
-
-		EntityManager em = entityManagerFactory.createEntityManager();
-		em.getTransaction().begin();
-		List<Category> l = em.createQuery("FROM categories", Category.class).getResultList();
-		for (Category c : l) {
-		System.out.println(c.getName());
+		List<Category> list_categories = new CategoriesFacade().getCategories();
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
+		for(Category c : list_categories)
+		{
+			out.println(c.getName());
 		}
-		em.getTransaction().commit();
-		em.close();
 	}
 
 }

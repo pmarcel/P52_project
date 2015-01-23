@@ -9,7 +9,7 @@ public class BaseFacade {
 	
 	public EntityManagerFactory getEMF (){
 		if (emf == null){
-			emf = Persistence.createEntityManagerFactory("WebApplication");
+			emf = Persistence.createEntityManagerFactory("ShareSomething");
 		}
 		return emf;
 	}

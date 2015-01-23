@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -133,11 +134,11 @@
 			</span>
 		</div>
 		<div id="categories">
-			<a href="">Animaux</a>
-			<a href="">Arts</a>
-			<a href="">Babybel</a>
-			<a href="">Histoire</a>
-			<a href="">Stanislas</a>
-			<a href="">Zorro</a>
+		
+		<c:forEach var="item" items="${categories}">
+			<option value="${item.id}">${item.name}</option>
+		</c:forEach>
+
+
 		</div>
 		<div id="content">
