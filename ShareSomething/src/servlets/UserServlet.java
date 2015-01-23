@@ -1,8 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,16 +34,6 @@ public class UserServlet extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		response.setContentType("text/html");
-		if(request.getParameter("action") == "login")
-		{
-			request.getRequestDispatcher("login.jsp").forward(request, response);
-		}
-		else if(request.getParameter("action") == "register")
-		{
-			request.getRequestDispatcher("register.jsp").forward(request, response);
-		}
 		// TODO Auto-generated method stub
 	}
 }	
