@@ -77,7 +77,8 @@
 			padding-top: 1%;
 		}
 		.menu_icon{
-		height: 100%;
+		height: 150%;
+		line-height: -50px;
 		}
 		</style>
 	</head>
@@ -88,8 +89,8 @@
 			<a href="">Recherche avancée</a></span>
 		</div>
 		<div id="menu">
-			<a href=""><img class="menu_icon" src="images/login.svg"></a>&nbsp; Se connecter
-			<a href=""><img class="menu_icon" src="images/create_account.svg"></a>&nbsp; Créer un compte
+			<a href=""><img class="menu_icon" src="images/login.svg"></a>&nbsp; <span class="menu_item">Se connecter</span>
+			<a href=""><img class="menu_icon" src="images/create_account.svg"></a>&nbsp; <span class="menu_item">Créer un compte</span>
 			<span style="float: right; text-align: right;">
 			Bonjour %USER% !
 			<a href="">Panier</a>

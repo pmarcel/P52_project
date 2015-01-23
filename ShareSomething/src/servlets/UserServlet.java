@@ -19,13 +19,13 @@ import javax.servlet.http.HttpServletResponse;
 				"/login", 
 				"/register"
 		})
-public class UserManager extends HttpServlet {
+public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * Default constructor. 
      */
-    public UserManager() {
+    public UserServlet() {
         // TODO Auto-generated constructor stub
     }
 
@@ -46,8 +46,8 @@ public class UserManager extends HttpServlet {
 			System.err.println(e);
 		}
 	}
-
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
-}
+}	
