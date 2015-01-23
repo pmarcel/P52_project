@@ -12,6 +12,7 @@
 		{
 			margin-left: 15%;
 			margin-right: 15%;
+			background-color: lightgrey;
 		}
 		.title
 		{
@@ -53,6 +54,7 @@
 			border: 1px solid black;
 			border-bottom: none;
 			padding: 1%;
+			background-color: white;
 		}
 		#categories
 		{
@@ -61,12 +63,14 @@
 			border: 1px solid black;
 			text-align: center;
 			border-bottom: none;
+			background-color: white;
 		}
 		#content
 		{
 			height: 75%;
 			border: 1px solid black;
 			border-bottom: none;
+			background-color: white;
 		}
 		#footer
 		{
@@ -90,7 +94,7 @@
 		
 		.slide_list
 		{
-			background-color: grey;
+			background-color: red;
 			height: 250px;
 			padding-left: 5%;
 			padding-right: 5%;
@@ -110,6 +114,7 @@
 		.panel_info p
 		{
 			font-weight: bold;
+			font-size: 1.4em;
 		}
 		</style>
 	</head>

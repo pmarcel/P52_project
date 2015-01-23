@@ -13,7 +13,7 @@
 		</div>
 	</div>
 	<div class="panel_info">
-		<p class="p_info">Meilleurs notes :</p>
+		<p class="p_info">Meilleures notes :</p>
 		<div class="slide_list">
 			<div class="slide">
 			</div>
