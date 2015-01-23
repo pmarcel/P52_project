@@ -41,7 +41,7 @@ public class UserServlet extends HttpServlet {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			
-			conn = DriverManager.getConnection("jdbdc:oracle:thin:@localhost")
+			conn = DriverManager.getConnection("jdbdc:oracle:thin:@localhost");
 		} catch (Exception e) {
 			System.err.println(e);
 		}

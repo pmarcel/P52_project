@@ -26,6 +26,7 @@
 			color: white;
 			font-size: 1em;
 			padding-left: 1%;
+			padding-right: 1%;
 			text-align: left;
 		}
 		#banner span
@@ -80,13 +81,43 @@
 		height: 150%;
 		line-height: -50px;
 		}
+		
+		.panel_info
+		{
+			margin-left: 4%;
+			margin-right: 4%;
+		}
+		
+		.slide_list
+		{
+			background-color: grey;
+			height: 250px;
+			padding-left: 5%;
+			padding-right: 5%;
+		}
+		
+		.slide
+		{
+			background-color: yellow;
+			height: 225px;
+			display: inline-block;
+			width: 33%;
+			height: 200px;
+			margin-top: 25px;
+			margin-bottom: 25px;
+		}
+		
+		.panel_info p
+		{
+			font-weight: bold;
+		}
 		</style>
 	</head>
 	<body>
 		<div id="banner">
 		<a class="title">#ArtAcademy</a>
 			<span><input type="text">
-			<a href="">Recherche avancée</a></span>
+			&nbsp;&nbsp;<a href="">Recherche avancée</a></span>
 		</div>
 		<div id="menu">
 			<a href=""><img class="menu_icon" src="images/login.svg"></a>&nbsp; <span class="menu_item">Se connecter</span>
