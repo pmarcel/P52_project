@@ -5,17 +5,19 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class BaseFacade {
-	private EntityManagerFactory emf;
+	protected static EntityManagerFactory emf = null;
 	
-	public EntityManagerFactory getEMF (){
-		if (emf == null){
+	protected BaseFacade() {}		// pour éviter de créer une BaseFacade avec EntityManagerFactory
+								// non initialisée
+	
+	public static EntityManagerFactory getEMF() {
+		if (emf == null) {
 			emf = Persistence.createEntityManagerFactory("ShareSomething");
 		}
 		return emf;
 	}
 	
-	public EntityManager getEM()
-	{
+	public static EntityManager getEM() {
 		return getEMF().createEntityManager();
 	}
 }

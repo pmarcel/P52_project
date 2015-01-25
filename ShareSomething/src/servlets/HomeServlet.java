@@ -43,7 +43,7 @@ public class HomeServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		CategoriesFacade catf = new CategoriesFacade();
-		List<Category> list_categories = catf.getCategories();
+		List<Category> list_categories = CategoriesFacade.list();
 		request.setAttribute("categories", list_categories);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 		
@@ -55,7 +55,8 @@ public class HomeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		List<Category> list_categories = new CategoriesFacade().getCategories();
+		new CategoriesFacade();
+		List<Category> list_categories = CategoriesFacade.list();
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		for(Category c : list_categories)

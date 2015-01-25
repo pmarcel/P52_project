@@ -135,9 +135,11 @@
 		</div>
 		<div id="categories">
 		
+		<%--
 		<c:forEach var="item" items="${categories}">
 			<option value="${item.id}">${item.name}</option>
 		</c:forEach>
+		--%>
 
 
 		</div>
