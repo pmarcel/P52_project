@@ -2,10 +2,10 @@
     pageEncoding="ISO-8859-1"%>
 	<jsp:include page="header.jsp" />
 	<h3>Connexion à votre compte</h3>
-	<form action="" method="">
+	<form action="" method="post">
 		<label>Utilisateur</label> <input type="text" name=""><br>
-		<label>Mot de passe</label> <input type="text" name=""><br>
-		<input type="submit" value="Connexion">
+		<label>Mot de passe</label> <input type="password" name=""><br>
+		<input type="submit" value="connect">
 	</form>
 	<jsp:include page="footer.jsp" />
 	</body>
