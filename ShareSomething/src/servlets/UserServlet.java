@@ -19,7 +19,7 @@ import facades.UsersFacade;
 @WebServlet(
 		description = "gestion des connexion/inscriptions", 
 		urlPatterns = { 
-				"/login", 
+				"/connect", 
 				"/register"
 		})
 public class UserServlet extends HttpServlet {
@@ -68,12 +68,22 @@ public class UserServlet extends HttpServlet {
 		//Inscription
 		if(action == "register")
 		{
-			
+			if(isConnected(request.getSession(false)))
+			{
+				request.setAttribute("error", "Erreur : Vous êtes déjà inscrit !");
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			}
 		}
 		//Connexion
 		else if(action =="connect")
 		{
-			if(UsersFacade.CheckLogin(login, password))
+			if(isConnected(request.getSession(false)))
+			{
+				request.setAttribute("error", "Erreur : Vous êtes déjà connecté !");
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			}
+			
+			else if(UsersFacade.CheckLogin(login, password))
 			{
 				//Création de la session
 				HttpSession session = request.getSession(true);    
@@ -111,5 +121,19 @@ public class UserServlet extends HttpServlet {
 			response.getWriter().write(action);
 			
 		
+	}
+	
+	private boolean isConnected(HttpSession session)
+	{
+		String login;
+		try{
+			login = session.getAttribute("login").toString();
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+		
+		return !(login == null || login.isEmpty());
 	}
 }	
