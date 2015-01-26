@@ -117,6 +117,15 @@
 			font-weight: bold;
 			font-size: 1.4em;
 		}
+		
+		#categories a
+		{
+			width: 10%;
+			text-align: center;
+			background-color: grey;
+			padding: 1%;
+			margin-top: 1%;
+		}
 		</style>
 	</head>
 	<body>
@@ -135,8 +144,7 @@
 		</div>
 		<div id="categories">
 		<c:forEach var="item" items="${categories}">
-			<option value="${item.id}">${item.name}</option>
+			<a href="${item.id}">${item.name}</a>
 		</c:forEach>
-		
 		</div>
 		<div id="content">
