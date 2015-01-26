@@ -126,8 +126,8 @@
 			&nbsp;&nbsp;<a href="">Recherche avancée</a></span>
 		</div>
 		<div id="menu">
-			<a href=""><img class="menu_icon" src="images/login.svg"></a>&nbsp; <span class="menu_item">Se connecter</span>
-			<a href=""><img class="menu_icon" src="images/create_account.svg"></a>&nbsp; <span class="menu_item">Créer un compte</span>
+			<a href="http://localhost:8080/ShareSomething/user?action=connect"><img class="menu_icon" src="images/login.svg"></a>&nbsp; <span class="menu_item">Se connecter</span>
+			<a href="http://localhost:8080/ShareSomething/user?action=register"><img class="menu_icon" src="images/create_account.svg"></a>&nbsp; <span class="menu_item">Créer un compte</span>
 			<span style="float: right; text-align: right;">
 			Bonjour %USER% !
 			<a href="">Panier</a>
