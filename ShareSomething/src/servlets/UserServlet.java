@@ -48,7 +48,25 @@ public class UserServlet extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("login.jsp").forward(request, response);
+		
+		String action;
+		
+		try{
+		action = request.getParameterValues("action")[0].trim();
+		}
+		catch(NullPointerException e)
+		{
+			action = "connect";
+		}
+				
+		
+		if( action.equals("register"))
+			request.getRequestDispatcher("register.jsp").forward(request, response);
+		else if(action.equals("connect"))
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		else
+			response.getWriter().write(action);
+			
 		
 	}
 }	
