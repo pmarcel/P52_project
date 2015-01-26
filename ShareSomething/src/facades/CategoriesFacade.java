@@ -20,7 +20,7 @@ public class CategoriesFacade extends BaseFacade{
 			System.err.println("-- ERROR FacadeCategorie.getCategories() -- "+ e.getMessage());
 		} finally {
 			try {
-				res = (ArrayList<Category>) q.getResultList();
+				res = q.getResultList();
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
 			}

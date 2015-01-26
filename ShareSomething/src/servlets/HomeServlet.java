@@ -16,10 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Category;
-
-
-import facades.CategoriesFacade;
+import models.*;
+import facades.*;
 
 /**
  * Servlet implementation class TestServlet
@@ -44,6 +42,13 @@ public class HomeServlet extends HttpServlet {
 		
 		CategoriesFacade catf = new CategoriesFacade();
 		List<Category> list_categories = CategoriesFacade.list();
+		
+		/*PrintWriter out = response.getWriter();
+
+		for(Category c : list_categories)
+		{
+			out.println("<p>"+c.getName()+"</p>");
+		}*/
 		request.setAttribute("categories", list_categories);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 		
@@ -61,7 +66,7 @@ public class HomeServlet extends HttpServlet {
 		response.setContentType("text/html");
 		for(Category c : list_categories)
 		{
-			out.println(c.getName());
+			out.println("<p>"+c.getName()+"</p>");
 		}
 	}
 
