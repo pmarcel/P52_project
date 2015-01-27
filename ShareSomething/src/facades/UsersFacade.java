@@ -39,27 +39,22 @@ public class UsersFacade extends BaseFacade {
 		
 		try {
 			q = m.createQuery("SELECT COUNT(e) FROM User e WHERE e.login LIKE :login");
-			q.setParameter("login", "login");
+			q.setParameter("login", login);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		} finally {
-			int nb = 1;
+			long nb = 1;
 			try {
-				nb = (int) q.getSingleResult();
+				nb = (long) q.getSingleResult();
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
 			}
 			
 			if (nb == 0) {
-				try {
 					res = new User();
 					res.setLogin(login);
 					res.setPassword(password);
-					
 					m.persist(res);
-				} catch (Exception e) {
-					System.err.println(e.getMessage());
-				}
 			}
 		}
 		
@@ -90,7 +85,7 @@ public class UsersFacade extends BaseFacade {
 	}
 	
 	/**
-	 * Renvoie Le user si la connexion s'est bien passée
+	 * Renvoie Le user si la connexion s'est bien passï¿½e
 	 * @param login
 	 * @param password
 	 * @return Le user ou null
@@ -106,7 +101,7 @@ public class UsersFacade extends BaseFacade {
 			System.err.println(e.getMessage());
 		} finally {
 			try {
-				res = (User) q.getSingleResult();		// Si plus d'un résultat (ou zéro), login failed
+				res = (User) q.getSingleResult();		// Si plus d'un rï¿½sultat (ou zï¿½ro), login failed
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
 			}

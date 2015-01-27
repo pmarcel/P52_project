@@ -53,7 +53,7 @@ public class UserServlet extends HttpServlet {
 		
 		//Redirection en cas de mauvais appel
 		if(action == null){
-			//request.getRequestDispatcher("index.jsp").forward(request, response);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 			return;
 		 }
 		else if(action.equals("register") && stop)
@@ -80,9 +80,7 @@ public class UserServlet extends HttpServlet {
 				User user = UsersFacade.create(login, password);
 				request.getSession().setAttribute("user", user);
 				request.setAttribute("message", "Inscription réussie");
-				//request.getRequestDispatcher("index.jsp").forward(request, response);
-				response.getWriter().write("inscris !");
-
+				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
 		}
 		//Connexion
