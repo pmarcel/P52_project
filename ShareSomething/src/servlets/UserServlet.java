@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import models.User;
 import facades.UsersFacade;
 
 /**
@@ -77,17 +78,18 @@ public class UserServlet extends HttpServlet {
 		//Connexion
 		else if(action =="connect")
 		{
+			User user =UsersFacade.CheckLogin(login, password);
+			
 			if(isConnected(request.getSession(false)))
 			{
 				request.setAttribute("error", "Erreur : Vous êtes déjà connecté !");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
-			
-			else if(UsersFacade.CheckLogin(login, password))
+			else if(user !=null)
 			{
 				//Création de la session
 				HttpSession session = request.getSession(true);    
-				session.setAttribute("login", login);
+				session.setAttribute("user", login);
 				request.setAttribute("message", "Connection réussie");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
@@ -125,15 +127,15 @@ public class UserServlet extends HttpServlet {
 	
 	private boolean isConnected(HttpSession session)
 	{
-		String login;
+		User user;
 		try{
-			login = session.getAttribute("login").toString();
+			user = (User)session.getAttribute("user");
 		}
 		catch(Exception e)
 		{
 			return false;
 		}
 		
-		return !(login == null || login.isEmpty());
+		return user != null;
 	}
 }	
