@@ -231,13 +231,7 @@
 	</head>
 	<body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script>
-		setTimeout('cacheDiv()', 2000);
- 
-function cacheDiv() {
-	 $("#popup").fadeOut("slow");
-}
-	</script>
+	
 		<script type="text/javascript">
 		/*
 			snow_img = "blood_snow.png";
@@ -326,4 +320,26 @@ function cacheDiv() {
 			<div id="login"><input type="button" value="Upload" onclick="alert('COUCOU');">&nbsp; | &nbsp;Bonjour --- !&nbsp; | &nbsp;<a href="">Panier</a></div>
 		</div>
 		<div id="content">
-		<div id="popup" class="popup-ok">Vous venez de vous connecter !</div>
+		
+		<% if(message.equals("Connection réussie")) { %> 
+			<div id="popup" class="popup-ok">Vous venez de vous connecter !</div> %>
+						<script>
+					setTimeout('cacheDiv()', 2000);
+			 
+			function cacheDiv() {
+				 $("#popup").fadeOut("slow");
+			}
+				</script>
+		<% } %>
+		<% if(error.equals("Erreur : Login ou mot de passe incorrect")) { %> 
+			<div id="popup" class="popup-erreur">Vous venez de vous connecter !</div> %>
+						<div id="popup" class="popup-ok">Vous venez de vous connecter !</div> %>
+						<script>
+					setTimeout('cacheDiv()', 2000);
+			 
+			function cacheDiv() {
+				 $("#popup").fadeOut("slow");
+			}
+				</script>
+		<% } %>
+		
