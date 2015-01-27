@@ -41,7 +41,7 @@ public class UserServlet extends HttpServlet {
 		boolean stop = false;
 		
 		try{
-			action = request.getParameter("submit");
+			action = request.getParameter("action");
 		  	login = request.getParameter("login");
 		  	password = request.getParameter("password");
 		}
@@ -53,9 +53,10 @@ public class UserServlet extends HttpServlet {
 		
 		//Redirection en cas de mauvais appel
 		if(action == null){
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			//request.getRequestDispatcher("index.jsp").forward(request, response);
+			return;
 		 }
-		if(action == "register" && stop)
+		else if(action.equals("register") && stop)
 		{
 			request.getRequestDispatcher("register.jsp").forward(request, response);;
 		}
@@ -67,16 +68,25 @@ public class UserServlet extends HttpServlet {
 		//Traitement des requètes
 		
 		//Inscription
-		if(action == "register")
+		if(action.equals("register"))
 		{
 			if(isConnected(request.getSession(false)))
 			{
 				request.setAttribute("error", "Erreur : Vous êtes déjà inscrit !");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
+			else
+			{
+				User user = UsersFacade.create(login, password);
+				request.getSession().setAttribute("user", user);
+				request.setAttribute("message", "Inscription réussie");
+				//request.getRequestDispatcher("index.jsp").forward(request, response);
+				response.getWriter().write("inscris !");
+
+			}
 		}
 		//Connexion
-		else if(action =="connect")
+		else if(action.equals("connect"))
 		{
 			User user =UsersFacade.CheckLogin(login, password);
 			
@@ -89,7 +99,7 @@ public class UserServlet extends HttpServlet {
 			{
 				//Création de la session
 				HttpSession session = request.getSession(true);    
-				session.setAttribute("user", login);
+				session.setAttribute("user", user);
 				request.setAttribute("message", "Connection réussie");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
@@ -125,7 +135,7 @@ public class UserServlet extends HttpServlet {
 		
 	}
 	
-	private boolean isConnected(HttpSession session)
+	public static boolean isConnected(HttpSession session)
 	{
 		User user;
 		try{

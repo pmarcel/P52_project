@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
  
 import java.io.PrintWriter;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -12,6 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+
+import models.User;
+import facades.ImagesFacade;
  
 @WebServlet("/UploadServlet")
 @MultipartConfig(fileSizeThreshold=1024*1024*2, // 2MB
@@ -31,7 +35,16 @@ public class UploadServlet extends HttpServlet {
      
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("/upload.jsp").forward(request, response);
+    	/*if(!UserServlet.isConnected(request.getSession()))
+    	{
+    		request.setAttribute("error", "Erreur : Vous devez être connecté pour upload des images");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+			return;
+    	}
+    	else
+    	{*/
+    		request.getRequestDispatcher("upload.jsp").forward(request, response);
+    	//}
 	}
 	
     /**
@@ -40,6 +53,13 @@ public class UploadServlet extends HttpServlet {
     
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
+    	
+    	/*if(!UserServlet.isConnected(request.getSession()))
+    	{
+    		request.setAttribute("error", "Erreur : Vous devez être connecté pour upload des images");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+			return;
+    	}*/
         // gets absolute path of the web application
         String appPath = request.getServletContext().getRealPath("");
         // constructs path of the directory to save uploaded file
@@ -50,19 +70,29 @@ public class UploadServlet extends HttpServlet {
             fileSaveDir.mkdir();
         }
          
+        String fileName = new Date().getTime()+"";
+        
+        String imageName="";
+        String extension ="";
+        String description = null;
+        
+        try
+        {
+        	description = request.getParameter("description");
+        }
+        catch(Exception e)
+        {
+        	description = "";
+        }
         for (Part part : request.getParts()) {
-            String fileName = extractFileName(part);
-            part.write(savePath + File.separator + fileName);
+            imageName = extractFileName(part);
+            extension = imageName.substring(imageName.length()-3);
+            part.write(savePath + File.separator + fileName +"."+ extension);
         }
  
+        ImagesFacade.Create(imageName, description, (User)request.getSession().getAttribute("user"), savePath + File.separator + fileName +"."+ extension);
         request.setAttribute("message", "Upload has been done successfully!");
-        getServletContext().getRequestDispatcher("/upload.jsp").forward(
-                request, response);
-        
-    	/*
-		PrintWriter out = response.getWriter();
-		out.print(savePath);*/
-   
+        getServletContext().getRequestDispatcher("/upload.jsp").forward(request, response);
     }
  
     /**

@@ -46,8 +46,8 @@ public class ImagesFacade extends BaseFacade {
 			res.setDescription(description);
 			res.setOwner(owner);
 			res.setLink(link);
-			
 			m.persist(res);
+			
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}

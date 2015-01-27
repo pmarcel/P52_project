@@ -11,6 +11,7 @@
     <form method="post" action="UploadServlet"
         enctype="multipart/form-data">
         Choisisez un fichier a télécharger: <input type="file" name="file" size="60" /><br />
+        Décrivez votre oeuvre <input type="text" name ="description"/>
         <br /> <input type="submit" value="Upload" />
     </form>
 </center>
