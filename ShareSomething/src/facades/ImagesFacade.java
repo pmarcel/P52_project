@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import models.Image;
+import models.User;
 
 public class ImagesFacade extends BaseFacade {
 	@SuppressWarnings("unchecked")
@@ -19,8 +20,58 @@ public class ImagesFacade extends BaseFacade {
 		} catch(Exception e) {
 			System.out.println("-- ERROR FacadeCategorie.getCategories() -- "+ e.getMessage());
 		} finally {
-			res = (ArrayList<Image>) q.getResultList();
+			try {
+				res = (ArrayList<Image>) q.getResultList();
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+			}
 			m.close();
+		}
+		
+		return res;
+	}
+	
+	
+	
+	public static Image Create(String name, String description, User owner, String link) {
+		EntityManager m = getEM();
+		Image res = null;
+		
+		m.getTransaction().begin();
+		
+		try {
+			res = new Image();
+			res.setName(name);
+			res.setDescription(description);
+			res.setOwner(owner);
+			res.setLink(link);
+			
+			m.persist(res);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		
+		m.getTransaction().commit();
+
+		return res;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<Image> SearchByName(String name) {
+		EntityManager m = getEM();
+		List<Image> res = new ArrayList<Image>();
+		Query q = null;
+		
+		try {
+			q = m.createQuery("SELECT e FROM Image e WHERE name LIKE '%" + name + "%'");
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		} finally {
+			try {
+				res = (ArrayList<Image>) q.getResultList();
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+			}
 		}
 		
 		return res;
