@@ -38,7 +38,8 @@ public class UsersFacade extends BaseFacade {
 		m.getTransaction().begin();
 		
 		try {
-			q = m.createQuery("SELECT COUNT(e) FROM User e WHERE login LIKE " + login);
+			q = m.createQuery("SELECT COUNT(e) FROM User e WHERE e.login LIKE :login");
+			q.setParameter("login", "login");
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		} finally {
