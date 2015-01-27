@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import models.Category;
 import models.Image;
 import models.User;
 
@@ -64,6 +65,28 @@ public class ImagesFacade extends BaseFacade {
 		
 		try {
 			q = m.createQuery("SELECT e FROM Image e WHERE name LIKE '%" + name + "%'");
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		} finally {
+			try {
+				res = (ArrayList<Image>) q.getResultList();
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+			}
+		}
+		
+		return res;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<Image> SearchByCategory(Category category) {
+		EntityManager m = getEM();
+		List<Image> res = new ArrayList<Image>();
+		Query q = null;
+		
+		try {
+			q = m.createQuery("SELECT e FROM Image e WHERE category = :category");
+			q.setParameter("category", category);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		} finally {
