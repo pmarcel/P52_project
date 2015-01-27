@@ -27,7 +27,7 @@ public class UploadServlet extends HttpServlet {
      * Name of the directory where uploaded files will be saved, relative to
      * the web application directory.
      */
-    private static final String SAVE_DIR = "UploadedImages";
+    private static final String SAVE_DIR = "upload";
      
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -43,7 +43,7 @@ public class UploadServlet extends HttpServlet {
         // gets absolute path of the web application
         String appPath = request.getServletContext().getRealPath("");
         // constructs path of the directory to save uploaded file
-        String savePath = appPath + File.separator + SAVE_DIR;
+        String savePath = appPath + File.separator +SAVE_DIR;
         // creates the save directory if it does not exists
         File fileSaveDir = new File(savePath);
         if (!fileSaveDir.exists()) {
@@ -56,14 +56,13 @@ public class UploadServlet extends HttpServlet {
         }
  
         request.setAttribute("message", "Upload has been done successfully!");
-        /*getServletContext().getRequestDispatcher("/message.jsp").forward(
-                request, response);*/
+        getServletContext().getRequestDispatcher("/upload.jsp").forward(
+                request, response);
         
-    	// TODO Auto-generated method stub
+    	/*
 		PrintWriter out = response.getWriter();
-		out.print(appPath + File.separator + SAVE_DIR);
-        
-        
+		out.print(savePath);*/
+   
     }
  
     /**
