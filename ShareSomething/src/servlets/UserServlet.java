@@ -53,24 +53,21 @@ public class UserServlet extends HttpServlet {
 		
 		//Redirection en cas de mauvais appel
 		if(action == null){
-			
-				try {
-					throw new Exception();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
+			request.setAttribute("error", "Erreur lors de l'appel de la page ! Action == null");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 			return;
 		 }
 		else if(action.equals("register") && stop)
 		{
-			request.getRequestDispatcher("register.jsp").forward(request, response);;
+			request.setAttribute("error", "Erreur lors de la récupération des paramètres");
+			request.getRequestDispatcher("register.jsp").forward(request, response);
+			return;
 		}
 		else if(stop)
 		{
+			request.setAttribute("error", "Erreur lors de la récupération des paramètres");
 			request.getRequestDispatcher("login.jsp").forward(request,response);
+			return;
 		}
 		
 		//Traitement des requètes
@@ -139,7 +136,7 @@ public class UserServlet extends HttpServlet {
 			action = "connect";
 		}
 				
-		if(isConnected(request.getSession(false)))
+		if(isConnected(request.getSession(false))&&!action.equals("disconnect"))
 		{
 			request.setAttribute("error", "Erreur : Vous êtes déjà connecté !");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -150,8 +147,18 @@ public class UserServlet extends HttpServlet {
 			request.getRequestDispatcher("register.jsp").forward(request, response);
 		else if(action.equals("connect"))
 			request.getRequestDispatcher("login.jsp").forward(request, response);
+		else if(action.equals("disconnect"))
+		{
+			HttpSession session = request.getSession(true);    
+			session.invalidate();
+			request.setAttribute("message", "Déconnexion réussie !");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 		else
-			response.getWriter().write(action);
+		{
+			request.setAttribute("error", "Erreur : action invalide ! "+action);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 			
 		
 	}

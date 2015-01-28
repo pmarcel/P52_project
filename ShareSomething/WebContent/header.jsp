@@ -317,8 +317,13 @@
 			<div class="menu_element"><a href="">Nouveautées <span>+</span></a></div>
 			<div class="menu_element"><a href="">Les plus vues <span>+</span></a></div>
 			<div class="menu_element"><a href="">Les mieux notées <span>+</span></a></div>
-			<div id="login"><a href="http://localhost:8080/ShareSomething/user?action=connect">Connexion</a>&nbsp; | &nbsp;<a href="http://localhost:8080/ShareSomething/user?action=register">Inscription</a></div>
-			<div id="login"><input type="button" value="Upload" onclick="alert('COUCOU');">&nbsp; | &nbsp;Bonjour --- !&nbsp; | &nbsp;<a href="">Panier</a></div>
+			<div id="login">
+				<a href="http://localhost:8080/ShareSomething/user?action=connect">Connexion</a>
+				&nbsp; | &nbsp;
+				<a href="http://localhost:8080/ShareSomething/user?action=register">Inscription</a>
+				<a href="http://localhost:8080/ShareSomething/user?action=disconnect">Déconnection</a>
+			</div>
+			<div id="Upload"><input type="button" value="Upload" onclick="alert('COUCOU');">&nbsp; | &nbsp;Bonjour --- !&nbsp; | &nbsp;<a href="">Panier</a></div>
 		</div>
 		
 		<div id="popuperr" class="popup-erreur"><%=request.getAttribute("error") %></div> 
@@ -330,7 +335,6 @@
 					}
 				</script>		
 				
-		<div id="content">
 			<div id="popupok" class="popup-ok"> <%=request.getAttribute("message") %></div> 
 				<script>
 					setTimeout('cacheDiv()', 3000);
@@ -340,4 +344,3 @@
 					}
 				</script>
 			
-		</div>
