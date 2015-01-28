@@ -9,6 +9,7 @@
 			body {
 				margin: 0;
 				background-color: #222222;
+				min-height: 100%;
 			}
 			#header1 {
 				padding-top: 0.5%;
@@ -57,6 +58,7 @@
 				padding-left: 0.5%;
 				padding-top: 0.5%;
 				padding-bottom: 0.5%;
+				
 			}
 			#footer span
 			{
@@ -227,80 +229,67 @@
 				border-radius: 10px;
 			}
 		</style>
+		
+<style>
+#menu-accordeon {
+  padding:0;
+  margin:0;
+  margin-top: -1.3%;
+  list-style:none;
+  text-align: center;
+  width: 180px;
+  display: block;
+position: absolute;
+}
+#menu-accordeon ul {
+  padding:0;
+  margin:0;
+  list-style:none;
+  text-align: center;
+}
+#menu-accordeon li {
+   margin-bottom:2px;
+}
+#menu-accordeon li li {
+   max-height:0;
+   overflow: hidden;
+   transition: all .5s;
+   border-radius:0;
+   background: #000;
+   box-shadow: none;
+   border:none;
+   margin:0
+}
+#menu-accordeon a {
+  display:block;
+  text-decoration: none;
+  color: #fff;
+  font-family: verdana;
+  font-size:1.2em
+}
+#menu-accordeon ul li a, #menu-accordeon li:hover li a {
+  font-size:1em
+}
+#menu-accordeon li:hover {
+}
+#menu-accordeon li li:hover {
+}
+#menu-accordeon ul li:last-child {
+}
+#menu-accordeon li:hover li {
+  max-height: 15em;
+}
+</style>
 		<title>ArtAcademy - N°1 sur les talents artistiques !</title>
 	</head>
 	<body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	
-		<script type="text/javascript">
-		/*
-			snow_img = "blood_snow.png";
-			snow_no = 150;
-
-			if (typeof(window.pageYOffset) == "number")
-			{
-				snow_browser_width = window.innerWidth;
-				snow_browser_height = window.innerHeight;
-			} 
-			else if (document.body && (document.body.scrollLeft || document.body.scrollTop))
-			{
-				snow_browser_width = document.body.offsetWidth;
-				snow_browser_height = document.body.offsetHeight;
-			}
-			else if (document.documentElement && (document.documentElement.scrollLeft || document.documentElement.scrollTop))
-			{
-				snow_browser_width = document.documentElement.offsetWidth;
-				snow_browser_height = document.documentElement.offsetHeight;
-			}
-			else
-			{
-				snow_browser_width = 500;
-				snow_browser_height = 500;	
-			}
-
-			snow_dx = [];
-			snow_xp = [];
-			snow_yp = [];
-			snow_am = [];
-			snow_stx = [];
-			snow_sty = [];
-
-			for (i = 0; i < snow_no; i++) 
-			{ 
-				snow_dx[i] = 0; 
-				snow_xp[i] = Math.random()*(snow_browser_width-50);
-				snow_yp[i] = Math.random()*snow_browser_height;
-				snow_am[i] = Math.random()*20; 
-				snow_stx[i] = 0.02 + Math.random()/10;
-				snow_sty[i] = 0.7 + Math.random();
-				if (i > 0) document.write("<\div id=\"snow_flake"+ i +"\" style=\"position:absolute;z-index:"+i+"\"><\img src=\""+snow_img+"\" border=\"0\"><\/div>"); else document.write("<\div id=\"snow_flake0\" style=\"position:absolute;z-index:0\"><\img src=\""+snow_img+"\" border=\"0\"></a><\/div>");
-			}
-
-			function SnowStart() 
-			{ 
-				for (i = 0; i < snow_no; i++) 
-				{ 
-					snow_yp[i] += snow_sty[i];
-					if (snow_yp[i] > snow_browser_height-50) 
-					{
-						snow_xp[i] = Math.random()*(snow_browser_width-snow_am[i]-30);
-						snow_yp[i] = 0;
-						snow_stx[i] = 0.02 + Math.random()/10;
-						snow_sty[i] = 0.7 + Math.random();
-					}
-					snow_dx[i] += snow_stx[i];
-					document.getElementById("snow_flake"+i).style.top=snow_yp[i]+"px";
-					document.getElementById("snow_flake"+i).style.left=snow_xp[i] + snow_am[i]*Math.sin(snow_dx[i])+"px";
-				}
-				snow_time = setTimeout("SnowStart()", 10);
-			}*/
-</script>
 		
 		<div id="header1">
-			<div id="logo"><a href=""><span>#</span>ArtAcademy</a></div>
+			<div id="logo"><a href="home"><span>#</span>ArtAcademy</a></div>
 			<div class="menu_element">
 					<ul id="menu-accordeon">
-					   <li><a href="">Catégories <span>▼</span></a>
+					   <li><a href="">Catégories <span>v</span></a>
 						  <ul>
 						  	<c:forEach var="item" items="${categories}">
 								<li><a href="${item.id}">${item.name}</a></li>
@@ -313,11 +302,12 @@
 			<div class="fear"><img src="images/fear_explode.png" alt="FEAR"></div>
 		</div>
 		<div id="header2">
-			<div class="menu_element"><a href="">Nouveautées <span>+</span></a></div>
-			<div class="menu_element"><a href="">Les plus vues <span>+</span></a></div>
-			<div class="menu_element"><a href="">Les mieux notées <span>+</span></a></div>
-			<div id="login"><a href="http://localhost:8080/ShareSomething/user?action=connect">Connexion</a>&nbsp; | &nbsp;<a href="http://localhost:8080/ShareSomething/user?action=register">Inscription</a></div>
-			<div id="login"><input type="button" value="Upload" onclick="alert('COUCOU');">&nbsp; | &nbsp;Bonjour --- !&nbsp; | &nbsp;<a href="">Panier</a></div>
+			<div class="menu_element"><a href="newpics">Nouveautées <span>+</span></a></div>
+			<div class="menu_element"><a href="seepics">Les plus vues <span>+</span></a></div>
+			<div class="menu_element"><a href="bestpics">Les mieux notées <span>+</span></a></div>
+			<div id="login"><a href="basket"><img width="24" height="24"  src="images/basket.svg"></a><span style="font-size: 0.8em;">44</span></div>
+			<div id="login"><a href="user?action=connect">Connexion</a>&nbsp; | &nbsp;<a href="user?action=register">Inscription</a></div>
+			<div id="login"><input type="button" value="Upload" onclick="alert('COUCOU');">&nbsp; | &nbsp;Bonjour --- !&nbsp; | &nbsp;</div>
 		</div>
 		<div id="content">
 		
@@ -333,7 +323,6 @@
 		<% }  %>
 		<% if(request.getParameter("error") != null) { %> 
 			<div id="popup" class="popup-erreur">Vous venez de vous connecter !</div> %>
-						<div id="popup" class="popup-ok">Vous venez de vous connecter !</div> %>
 						<script>
 					setTimeout('cacheDiv()', 2000);
 			 
