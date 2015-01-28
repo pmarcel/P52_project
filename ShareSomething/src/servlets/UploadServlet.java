@@ -35,16 +35,16 @@ public class UploadServlet extends HttpServlet {
      
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-    	/*if(!UserServlet.isConnected(request.getSession()))
+    	if(!UserServlet.isConnected(request.getSession()))
     	{
     		request.setAttribute("error", "Erreur : Vous devez être connecté pour upload des images");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 			return;
     	}
     	else
-    	{*/
+    	{
     		request.getRequestDispatcher("upload.jsp").forward(request, response);
-    	//}
+    	}
 	}
 	
     /**
@@ -54,12 +54,13 @@ public class UploadServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
     	
-    	/*if(!UserServlet.isConnected(request.getSession()))
+    	if(!UserServlet.isConnected(request.getSession()))
     	{
     		request.setAttribute("error", "Erreur : Vous devez être connecté pour upload des images");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 			return;
-    	}*/
+    	}
+    	
         // gets absolute path of the web application
         String appPath = request.getServletContext().getRealPath("");
         // constructs path of the directory to save uploaded file
@@ -70,10 +71,9 @@ public class UploadServlet extends HttpServlet {
             fileSaveDir.mkdir();
         }
          
-        String fileName = new Date().getTime()+"";
+        String filecode = new Date().getTime()+"";
         
         String imageName="";
-        String extension ="";
         String description = null;
         
         try
@@ -86,11 +86,10 @@ public class UploadServlet extends HttpServlet {
         }
         for (Part part : request.getParts()) {
             imageName = extractFileName(part);
-            extension = imageName.substring(imageName.length()-3);
-            part.write(savePath + File.separator + fileName +"."+ extension);
+            part.write(savePath + File.separator + filecode+imageName);
         }
  
-        ImagesFacade.Create(imageName, description, (User)request.getSession().getAttribute("user"), savePath + File.separator + fileName +"."+ extension);
+        ImagesFacade.Create(imageName, description, (User)request.getSession().getAttribute("user"), "/upload/"+filecode+imageName);
         request.setAttribute("message", "Upload has been done successfully!");
         getServletContext().getRequestDispatcher("/upload.jsp").forward(request, response);
     }

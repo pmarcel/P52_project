@@ -53,16 +53,21 @@ public class UserServlet extends HttpServlet {
 		
 		//Redirection en cas de mauvais appel
 		if(action == null){
+			request.setAttribute("error", "Erreur lors de l'appel de la page ! Action == null");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 			return;
 		 }
 		else if(action.equals("register") && stop)
 		{
-			request.getRequestDispatcher("register.jsp").forward(request, response);;
+			request.setAttribute("error", "Erreur lors de la récupération des paramètres");
+			request.getRequestDispatcher("register.jsp").forward(request, response);
+			return;
 		}
 		else if(stop)
 		{
+			request.setAttribute("error", "Erreur lors de la récupération des paramètres");
 			request.getRequestDispatcher("login.jsp").forward(request,response);
+			return;
 		}
 		
 		//Traitement des requètes
@@ -74,10 +79,18 @@ public class UserServlet extends HttpServlet {
 			{
 				request.setAttribute("error", "Erreur : Vous êtes déjà inscrit !");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
+				return;
 			}
 			else
 			{
 				User user = UsersFacade.create(login, password);
+				
+				if(user == null)
+				{
+					request.setAttribute("error", "Erreur : Ce login est déja attribué !");
+					request.getRequestDispatcher("register.jsp").forward(request, response);
+					return;
+				}
 				request.getSession().setAttribute("user", user);
 				request.setAttribute("message", "Inscription réussie");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -105,7 +118,7 @@ public class UserServlet extends HttpServlet {
 			{
 				//redirection avec erreur
 				request.setAttribute("error", "Erreur : Login ou mot de passe incorrect");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}
 		}
 		
@@ -123,12 +136,29 @@ public class UserServlet extends HttpServlet {
 			action = "connect";
 		}
 				
+		if(isConnected(request.getSession(false))&&!action.equals("disconnect"))
+		{
+			request.setAttribute("error", "Erreur : Vous êtes déjà connecté !");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+			return;
+		}
+		
 		if( action.equals("register"))
 			request.getRequestDispatcher("register.jsp").forward(request, response);
 		else if(action.equals("connect"))
 			request.getRequestDispatcher("login.jsp").forward(request, response);
+		else if(action.equals("disconnect"))
+		{
+			HttpSession session = request.getSession(true);    
+			session.invalidate();
+			request.setAttribute("message", "Déconnexion réussie !");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 		else
-			response.getWriter().write(action);
+		{
+			request.setAttribute("error", "Erreur : action invalide ! "+action);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 			
 		
 	}
