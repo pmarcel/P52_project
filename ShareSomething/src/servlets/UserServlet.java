@@ -82,10 +82,18 @@ public class UserServlet extends HttpServlet {
 			{
 				request.setAttribute("error", "Erreur : Vous êtes déjà inscrit !");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
+				return;
 			}
 			else
 			{
 				User user = UsersFacade.create(login, password);
+				
+				if(user == null)
+				{
+					request.setAttribute("error", "Erreur : Ce login est déja attribué !");
+					request.getRequestDispatcher("register.jsp").forward(request, response);
+					return;
+				}
 				request.getSession().setAttribute("user", user);
 				request.setAttribute("message", "Inscription réussie");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
