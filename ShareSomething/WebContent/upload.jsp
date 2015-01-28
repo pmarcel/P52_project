@@ -6,6 +6,8 @@
 <title>File Upload</title>
 </head>
 <body>
+	<jsp:include page="header.jsp" />
+
 <center>
     <h1>Upload</h1>
     <form method="post" action="UploadServlet"
@@ -15,5 +17,8 @@
         <br /> <input type="submit" value="Upload" />
     </form>
 </center>
+	<jsp:include page="footer.jsp" />
+
 </body>
+
 </html>

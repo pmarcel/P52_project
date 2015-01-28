@@ -323,7 +323,11 @@
 				<a href="http://localhost:8080/ShareSomething/user?action=register">Inscription</a>
 				<a href="http://localhost:8080/ShareSomething/user?action=disconnect">Déconnection</a>
 			</div>
-			<div id="Upload"><input type="button" value="Upload" onclick="alert('COUCOU');">&nbsp; | &nbsp;Bonjour --- !&nbsp; | &nbsp;<a href="">Panier</a></div>
+			<div>
+				<a id="Upload" href ="http://localhost:8080/ShareSomething/upload">Partager une image</a>
+				 |
+				<a href="">Panier</a>
+			</div>
 		</div>
 		
 		<div id="popuperr" class="popup-erreur"><%=request.getAttribute("error") %></div> 
