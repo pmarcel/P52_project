@@ -97,16 +97,16 @@ public class UsersFacade extends BaseFacade {
 		User res = null;
 		
 		try {
-			q = m.createQuery("SELECT e FROM Users e WHERE login LIKE ':login' AND password = ':password'");
+			q = m.createQuery("SELECT e FROM User e WHERE e.login LIKE :login AND e.password = :password");
 			q.setParameter("login", login);
 			q.setParameter("password", password);
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			System.err.println(e.getMessage() + "CheckLogin");
 		} finally {
 			try {
 				res = (User) q.getSingleResult();		// Si plus d'un r�sultat (ou z�ro), login failed
 			} catch (Exception e) {
-				System.err.println(e.getMessage());
+				System.err.println("User not found");
 			}
 			m.close();
 		}

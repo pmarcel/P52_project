@@ -53,6 +53,14 @@ public class UserServlet extends HttpServlet {
 		
 		//Redirection en cas de mauvais appel
 		if(action == null){
+			
+				try {
+					throw new Exception();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 			return;
 		 }
@@ -105,7 +113,7 @@ public class UserServlet extends HttpServlet {
 			{
 				//redirection avec erreur
 				request.setAttribute("error", "Erreur : Login ou mot de passe incorrect");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}
 		}
 		
@@ -123,6 +131,13 @@ public class UserServlet extends HttpServlet {
 			action = "connect";
 		}
 				
+		if(isConnected(request.getSession(false)))
+		{
+			request.setAttribute("error", "Erreur : Vous êtes déjà connecté !");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+			return;
+		}
+		
 		if( action.equals("register"))
 			request.getRequestDispatcher("register.jsp").forward(request, response);
 		else if(action.equals("connect"))
