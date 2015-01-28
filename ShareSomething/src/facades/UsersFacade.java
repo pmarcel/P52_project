@@ -69,7 +69,8 @@ public class UsersFacade extends BaseFacade {
 		User res = null;
 		
 		try {
-			q = m.createQuery("Select e FROM User e WHERE id = " + Integer.toString(id));
+			q = m.createQuery("Select e FROM User e WHERE id = :id");
+			q.setParameter("id", id);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		} finally {
@@ -96,7 +97,9 @@ public class UsersFacade extends BaseFacade {
 		User res = null;
 		
 		try {
-			q = m.createQuery("SELECT e FROM Users e WHERE login LIKE '" + login + "' AND password = '" + password + "'");
+			q = m.createQuery("SELECT e FROM Users e WHERE login LIKE ':login' AND password = ':password'");
+			q.setParameter("login", login);
+			q.setParameter("password", password);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		} finally {

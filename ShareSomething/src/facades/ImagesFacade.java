@@ -64,7 +64,8 @@ public class ImagesFacade extends BaseFacade {
 		Query q = null;
 		
 		try {
-			q = m.createQuery("SELECT e FROM Image e WHERE name LIKE '%" + name + "%'");
+			q = m.createQuery("SELECT e FROM Image e WHERE name LIKE '%:name%'");
+			q.setParameter(":name", name);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		} finally {
