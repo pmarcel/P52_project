@@ -312,10 +312,10 @@ position: absolute;
 			<div class="menu_element"><a href="bestpics">Les mieux notées <span>+</span></a></div>
 			<div id="login"><a href="basket"><img width="24" height="24"  src="images/basket.svg"></a><span style="font-size: 0.8em;">44</span></div>
 			<% if(session.getAttribute("login") == null) { %><div id="login"><a href="user?action=connect">Connexion</a>&nbsp; | &nbsp;<a href="user?action=register">Inscription</a></div><% } %>
-			<div id="login"><% if(session.getAttribute("login") != null) {%><input type="button" value="Upload" onclick="window.location.assign('upload');">&nbsp;&nbsp;Bonjour <%= session.getAttribute("login")%>! <input type="button" value="Deconnexion"><% } %> &nbsp;&nbsp;</div>
+			<div id="login"><% if(session.getAttribute("login") != null) {%><input type="button" value="Upload" onclick="window.location.assign('upload');">&nbsp;&nbsp;Bonjour <%= session.getAttribute("login")%>! <a href =user?action=disconnect> Deconnexion</a><% } %> &nbsp;&nbsp;</div>
 		</div>
-		<div id="content">
 		
+	<% if (request.getAttribute("error")!=null) { %>
 			<div id="popuperr" class="popup-error"><%=request.getAttribute("error") %></div> 
 				<script>
 					setTimeout('cacheDiverr()', 2000);
@@ -324,7 +324,9 @@ position: absolute;
 						 $("#popuperr").fadeOut("slow");
 					}
 				</script>		
-				
+	<%} %>
+	<% if (request.getAttribute("message")!=null) { %>
+	
 			<div id="popupok" class="popup-ok"> <%=request.getAttribute("message") %></div> 
 				<script>
 					setTimeout('cacheDiv()', 3000);
@@ -333,4 +335,6 @@ position: absolute;
 						$("#popupok").fadeOut("slow");
 					}
 				</script>
+	<%} %>
+	
 		
