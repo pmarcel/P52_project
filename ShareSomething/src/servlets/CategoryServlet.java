@@ -32,23 +32,19 @@ public class CategoryServlet extends HttpServlet {
      */
     public CategoryServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
-		CategoriesFacade catf = new CategoriesFacade();
 		List<Category> list_categories = CategoriesFacade.list();
 		
 		if(request.getParameterValues("id")[0] != null)
 		{
 		List<Image> list_pictures = ImagesFacade.SearchByCategory(CategoriesFacade.getById(Integer.parseInt(request.getParameterValues("id")[0])));
 		
-		System.out.println(list_pictures.size());
 		request.setAttribute("categories", list_categories);
 		request.setAttribute("pictures", list_pictures);
 		request.getRequestDispatcher("category.jsp").forward(request, response);
@@ -60,16 +56,7 @@ public class CategoryServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		new CategoriesFacade();
-		List<Category> list_categories = CategoriesFacade.list();
-		PrintWriter out = response.getWriter();
-		response.setContentType("text/html");
-		for(Category c : list_categories)
-		{
-			out.println("<p>"+c.getName()+"</p>");
-		}
+		//Inutile pour cette servlet
 	}
 
 }

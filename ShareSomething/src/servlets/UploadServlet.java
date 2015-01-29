@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import Helpers.navigationHelper;
 import models.Category;
 import models.User;
 import facades.CategoriesFacade;
@@ -41,15 +42,12 @@ public class UploadServlet extends HttpServlet {
     	if(!UserServlet.isConnected(request.getSession()))
     	{
     		request.setAttribute("error", "Erreur : Vous devez être connecté pour upload des images");
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			navigationHelper.navigateWithCategoriesAndAllImages(request, response, "index.jsp");
 			return;
     	}
     	else
     	{
-    		List<Category> list_categories = CategoriesFacade.list();
-
-    		request.setAttribute("categories", list_categories);
-    		request.getRequestDispatcher("upload.jsp").forward(request, response);
+			navigationHelper.navigateWithCategories(request, response, "upload.jsp");
     	}
 	}
 	
@@ -63,7 +61,7 @@ public class UploadServlet extends HttpServlet {
     	if(!UserServlet.isConnected(request.getSession()))
     	{
     		request.setAttribute("error", "Erreur : Vous devez être connecté pour upload des images");
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			navigationHelper.navigateWithCategoriesAndAllImages(request, response, "index.jsp");
 			return;
     	}
     	
@@ -97,7 +95,6 @@ public class UploadServlet extends HttpServlet {
         for (Part part : request.getParts()) {
             if(extractFileName(part)!="") {
 	        	imageName = extractFileName(part);
-	        	System.out.println(imageName);
 	
 	            part.write(savePath + File.separator + filecode+imageName);
             }
@@ -110,7 +107,7 @@ public class UploadServlet extends HttpServlet {
         		CategoriesFacade.getById(category_id));	// cat�gorie.
         
         request.setAttribute("message", "Upload has been done successfully!");
-        getServletContext().getRequestDispatcher("/upload.jsp").forward(request, response);
+		navigationHelper.navigateWithCategories(request, response, "upload.jsp");
     }
  
     /**

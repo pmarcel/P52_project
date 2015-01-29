@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Helpers.navigationHelper;
 import models.*;
 import facades.*;
 
@@ -31,6 +32,7 @@ public class BasketServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<<<<<<< HEAD
 		if (request.getAttribute("action") == "delete") {
 			long id = (long) request.getAttribute("image");
 			
@@ -53,13 +55,22 @@ public class BasketServlet extends HttpServlet {
 			
 			request.getRequestDispatcher("basket.jsp").forward(request, response);
 		}
+=======
+		// TODO Auto-generated method stub
+						
+>>>>>>> origin/master
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<<<<<<< HEAD
 		new CategoriesFacade();
+=======
+		// TODO Auto-generated method stub
+		
+>>>>>>> origin/master
 		List<Category> list_categories = CategoriesFacade.list();
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");

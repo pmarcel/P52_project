@@ -8,6 +8,7 @@ import java.util.List;
 
 
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Helpers.navigationHelper;
 import models.*;
 import facades.*;
 
@@ -32,23 +34,14 @@ public class HomeServlet extends HttpServlet {
      */
     public HomeServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
-		List<Category> list_categories = CategoriesFacade.list();
-		List<Image> list_pictures = ImagesFacade.getImages();
-		
-		
-		System.out.println(list_pictures.size());
-		request.setAttribute("categories", list_categories);
-		request.setAttribute("pictures", list_pictures);
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		navigationHelper.navigateWithCategoriesAndAllImages(request, response, "index.jsp");
 		
 	}
 
@@ -56,9 +49,7 @@ public class HomeServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
-		new CategoriesFacade();
 		List<Category> list_categories = CategoriesFacade.list();
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
