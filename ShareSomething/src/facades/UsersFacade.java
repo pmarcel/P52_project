@@ -113,4 +113,25 @@ public class UsersFacade extends BaseFacade {
 		
 		return res;
 	}
+	
+	public static User getByLogin(String login) {
+		EntityManager m = getEM();
+		Query q = null;
+		User res = null;
+		
+		try {
+			q = m.createQuery("SELECT e FROM User e WHERE e.login LIKE :login");
+			q.setParameter("login", login);
+		} catch (Exception e) {
+			System.err.println(e.getMessage() + "getByLogin");
+		} finally {
+			try {
+				res = (User) q.getSingleResult();
+			} catch (Exception e) {
+			}
+			m.close();
+		}
+		
+		return res;
+	}
 }
