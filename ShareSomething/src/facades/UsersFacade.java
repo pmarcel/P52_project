@@ -69,7 +69,7 @@ public class UsersFacade extends BaseFacade {
 		User res = null;
 		
 		try {
-			q = m.createQuery("Select e FROM User e WHERE id = :id");
+			q = m.createQuery("Select e FROM User e WHERE e.id = :id");
 			q.setParameter("id", id);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());

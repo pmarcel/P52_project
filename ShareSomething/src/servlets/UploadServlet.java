@@ -83,30 +83,34 @@ public class UploadServlet extends HttpServlet {
         
         String imageName="";
         String description = null;
-        int category = 0;
+        int category_id = 0;
         
         try
         {
         	description = request.getParameter("description");
-        	category = Integer.parseInt(request.getParameter("category"));
+        	category_id = Integer.parseInt(request.getParameter("category"));
         }
         catch(Exception e)
         {
         	description = "";
         }
         for (Part part : request.getParts()) {
-            imageName = extractFileName(part);
-            part.write(savePath + File.separator + filecode+imageName);
+            if(extractFileName(part)!="") {
+	        	imageName = extractFileName(part);
+	        	System.out.println(imageName);
+	
+	            part.write(savePath + File.separator + filecode+imageName);
+            }
         }
  
         ImagesFacade.Create(imageName,					// nom de l'image 
-        		description, 							// description
+        		"''" + description + "''", 							// description
         		(User)request.getSession().getAttribute("user"), // id de l'utilisateur
         		"/upload/"+filecode+imageName, 			// lien
-        		CategoriesFacade.getById(category));	// catégorie.
+        		CategoriesFacade.getById(category_id));	// catégorie.
         
         request.setAttribute("message", "Upload has been done successfully!");
-        getServletContext().getRequestDispatcher("/upload.jsp").forward(request, response);
+        //getServletContext().getRequestDispatcher("/upload.jsp").forward(request, response);
     }
  
     /**

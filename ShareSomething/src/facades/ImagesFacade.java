@@ -40,12 +40,15 @@ public class ImagesFacade extends BaseFacade {
 		
 		m.getTransaction().begin();
 		
+		System.out.println(category.getId() + "\n" + category.getName() + "\n" + category.getParent());
+		
 		try {
 			res = new Image();
 			res.setName(name);
 			res.setDescription(description);
 			res.setOwner(owner);
 			res.setLink(link);
+			category = m.find(Category.class, category.getId());
 			res.setCategory(category);
 			m.persist(res);
 			
@@ -65,7 +68,7 @@ public class ImagesFacade extends BaseFacade {
 		Query q = null;
 		
 		try {
-			q = m.createQuery("SELECT e FROM Image e WHERE Name LIKE '%:name%'");
+			q = m.createQuery("SELECT e FROM Image e WHERE e.name LIKE '%:name%'");
 			q.setParameter(":name", name);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
