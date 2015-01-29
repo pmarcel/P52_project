@@ -17,12 +17,12 @@ public class ImagesFacade extends BaseFacade {
 		Query q = null;
 		List<Image> res = new ArrayList<Image>();
 		try {
-			q = m.createQuery("SELECT e FROM Category e");
+			q = m.createQuery("SELECT e FROM Image e");
 		} catch(Exception e) {
 			System.out.println("-- ERROR FacadeCategorie.getCategories() -- "+ e.getMessage());
 		} finally {
 			try {
-				res = (ArrayList<Image>) q.getResultList();
+				res = q.getResultList();
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
 			}

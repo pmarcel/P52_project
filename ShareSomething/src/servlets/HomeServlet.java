@@ -41,15 +41,13 @@ public class HomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		CategoriesFacade catf = new CategoriesFacade();
 		List<Category> list_categories = CategoriesFacade.list();
+		List<Image> list_pictures = ImagesFacade.getImages();
 		
-		//ImagesFacade imgf = new ImagesFacade();
-		//List<Image> list_pictures = ImagesFacade.getImages();
 		
-
+		System.out.println(list_pictures.size());
 		request.setAttribute("categories", list_categories);
-		//request.setAttribute("pictures", list_pictures);
+		request.setAttribute("pictures", list_pictures);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 		
 	}
