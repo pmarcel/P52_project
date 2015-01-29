@@ -34,7 +34,7 @@ public class ImagesFacade extends BaseFacade {
 	
 	
 	
-	public static Image Create(String name, String description, User owner, String link) {
+	public static Image Create(String name, String description, User owner, String link, Category category) {
 		EntityManager m = getEM();
 		Image res = null;
 		
@@ -46,6 +46,7 @@ public class ImagesFacade extends BaseFacade {
 			res.setDescription(description);
 			res.setOwner(owner);
 			res.setLink(link);
+			res.setCategory(category);
 			m.persist(res);
 			
 		} catch (Exception e) {
