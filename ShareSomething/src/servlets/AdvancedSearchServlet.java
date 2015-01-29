@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.util.List;
 
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Helpers.navigationHelper;
 import models.*;
 import facades.*;
 
@@ -40,8 +42,7 @@ public class AdvancedSearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 				
-		request.setAttribute("categories", list_categories);
-		request.getRequestDispatcher("advancedsearch.jsp").forward(request, response);
+		navigationHelper.navigateWithCategories(request, response, "advancedsearch.jsp");
 		
 	}
 
