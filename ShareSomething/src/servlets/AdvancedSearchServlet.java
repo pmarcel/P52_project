@@ -89,10 +89,9 @@ public class AdvancedSearchServlet extends HttpServlet {
 		else
 		{
 			List<Category> list_categories = CategoriesFacade.list();
-
 			request.setAttribute("categories", list_categories);
 			request.setAttribute("pictures", results);
-			request.setAttribute("message", results.size() +" résultats trouvés");
+			request.setAttribute("message", results.size() +" résultat(s) trouvé(s)");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}
