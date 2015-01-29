@@ -6,6 +6,6 @@
 			<div id="pics_list">
 			<c:forEach var="item" items="${pictures}">
 				<div class="picblock"><img src="${item.link}"></div>
-			</c:forEach>
+			</c:forEach> 
 			</div>
 	<jsp:include page="footer.jsp" />

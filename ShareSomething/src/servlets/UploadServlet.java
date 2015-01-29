@@ -106,7 +106,7 @@ public class UploadServlet extends HttpServlet {
         ImagesFacade.Create(imageName,					// nom de l'image 
         		"''" + description + "''", 							// description
         		(User)request.getSession().getAttribute("user"), // id de l'utilisateur
-        		"/upload/"+filecode+imageName, 			// lien
+        		"/ShareSomething/upload/"+filecode+imageName, 			// lien
         		CategoriesFacade.getById(category_id));	// cat�gorie.
         
         request.setAttribute("message", "Upload has been done successfully!");
