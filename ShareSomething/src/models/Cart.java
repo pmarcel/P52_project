@@ -3,11 +3,13 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
+import facades.ImagesFacade;
+
 public class Cart {
 	ArrayList<Image> images = new ArrayList<Image>();
 	
-	public void addImage(Image image) {
-		images.add(image);
+	public void addImage(long id) {
+		images.add(ImagesFacade.searchById(id));
 	}
 	
 	public boolean removeImage(Image image) {

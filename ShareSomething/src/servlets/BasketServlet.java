@@ -32,27 +32,30 @@ public class BasketServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (request.getAttribute("action") == "delete") {
-			long id = (long) request.getAttribute("image");
+		if (request.getParameter("action") == "delete") {
+			long id = Long.parseLong(request.getParameter("image"));
 			
 			((Cart) request.getSession().getAttribute("cart")).removeImageById(id);
 
 			request.getRequestDispatcher("index.jsp").forward(request, response);
-		} else if (request.getAttribute("action") == "add") {
+		} else if (request.getParameter("action") == "add") {
 			System.out.println("add");
-			long id = (long) request.getAttribute("image");
+			long id = Long.parseLong(request.getParameter("image"));
 			
-			((Cart) request.getSession().getAttribute("cart")).removeImageById(id);
+			((Cart) request.getSession().getAttribute("cart")).addImage(id);
 			
 			request.getRequestDispatcher("basket.jsp").forward(request, response);
-		} else {
+		} else if (UserServlet.isConnected(request.getSession())) {
 			List<Category> list_categories = CategoriesFacade.list();
 			request.setAttribute("categories", list_categories);
-					
+			
+			
 			List<Image> list_images = ((Cart) request.getSession().getAttribute("cart")).list();
 			request.setAttribute("images", list_images);
 			
 			request.getRequestDispatcher("basket.jsp").forward(request, response);
+		} else {
+			navigationHelper.navigateWithCategoriesAndAllImages(request, response, "index.jsp");
 		}
 	}
 
