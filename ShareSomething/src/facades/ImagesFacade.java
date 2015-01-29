@@ -125,16 +125,6 @@ public class ImagesFacade extends BaseFacade {
 		return res;
 	}
 	
-<<<<<<< HEAD
-	public static Image searchById(long id) {
-		EntityManager m = getEM();
-		Image res = null;
-		Query q = null;
-		
-		try {
-			q = m.createQuery("SELECT e FROM Image e WHERE e.id = :id");
-			q.setParameter("id", id);
-=======
 	@SuppressWarnings("unchecked")
 	public static List<Image> SearchByOwner(User user) {
 		EntityManager m = getEM();
@@ -144,16 +134,11 @@ public class ImagesFacade extends BaseFacade {
 		try {
 			q = m.createQuery("SELECT e FROM Image e WHERE e.owner = :user");
 			q.setParameter("user", user);
->>>>>>> 7339b77aea865730917f36e3cd6c0aaca40aba07
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		} finally {
 			try {
-<<<<<<< HEAD
-				res = (Image) q.getSingleResult();
-=======
 				res = q.getResultList();
->>>>>>> 7339b77aea865730917f36e3cd6c0aaca40aba07
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
 			}
@@ -177,6 +162,28 @@ public class ImagesFacade extends BaseFacade {
 		} finally {
 			try {
 				res = q.getResultList();
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+			}
+		}
+		
+		return res;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static Image searchById(long id) {
+		EntityManager m = getEM();
+		Image res = null;
+		Query q = null;
+		
+		try {
+			q = m.createQuery("SELECT e FROM Image e WHERE id = :id");
+			q.setParameter("id", id);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		} finally {
+			try {
+				res = (Image) q.getSingleResult();
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
 			}

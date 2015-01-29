@@ -51,9 +51,7 @@ public class SearchServlet extends HttpServlet {
 			navigationHelper.navigateWithCategoriesAndAllImages(request, response, "index.jsp");
 			return;
 		}
-		
-		System.out.println(criteria);
-		
+				
 		List<Image> results = new ArrayList<Image>();
 		
 		User owner = UsersFacade.getByLogin(criteria);
@@ -79,7 +77,7 @@ public class SearchServlet extends HttpServlet {
 
 			request.setAttribute("categories", list_categories);
 			request.setAttribute("pictures", results);
-			request.setAttribute("message", results.size() +" résultats trouvés");
+			request.setAttribute("message", results.size() +" résultat(s) trouvé(s)");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 		

@@ -51,8 +51,8 @@ public class AdvancedSearchServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String keyword = request.getParameter("keyword");
 		String author = request.getParameter("author");
-		
-		if(keyword == null && author == null)
+
+		if((keyword == null || keyword.isEmpty()) && (author == null ||author.isEmpty()) )
 		{
 			request.setAttribute("error", "Erreur : Veuillez entrer vos critères de recherche");
 			navigationHelper.navigateWithCategories(request, response, "advancedsearch.jsp");
@@ -61,15 +61,14 @@ public class AdvancedSearchServlet extends HttpServlet {
 		
 		List<Image> results = new ArrayList<Image>();
 		
-		if(keyword == null)
+		if(keyword == null || keyword.isEmpty())
 		{
 			//recherche par autheur
 			User user  = UsersFacade.getByLogin(author);
 			if(user != null)
 				results = ImagesFacade.SearchByOwner(user);
 		}
-		
-		else if(author == null)
+		else if(author == null || author.isEmpty())
 		{
 			//recherche par critère
 			results = ImagesFacade.SearchByDescription(keyword);
