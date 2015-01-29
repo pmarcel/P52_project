@@ -316,24 +316,24 @@ position: absolute;
 		</div>
 		<div id="content">
 		
-		<% if( request.getParameter("message") != null) {%> 
-			<div id="popup" class="popup-ok">Vous venez de vous connecter !</div> %>
-						<script>
+	<div id="popuperr" class="popup-erreur"><%=request.getAttribute("error") %></div> 
+				<script>
 					setTimeout('cacheDiv()', 2000);
+							 
+					function cacheDiv() {
+						 $("#popuperr").fadeOut("slow");
+					}
+				</script>		
+				
+			<div id="popupok" class="popup-ok"> <%=request.getAttribute("message") %></div> 
+				<script>
+					setTimeout('cacheDiv()', 3000);
 			 
 			function cacheDiv() {
 				 $("#popup").fadeOut("slow");
 			}
-				</script>
-		<% }  %>
-		<% if(request.getParameter("error") != null) { %> 
-			<div id="popup" class="popup-erreur">Vous venez de vous connecter !</div> %>
-						<script>
-					setTimeout('cacheDiv()', 2000);
-			 
-			function cacheDiv() {
-				 $("#popup").fadeOut("slow");
-			}
-				</script>
-		<% } %>
+					function cacheDiv() {
+						 $("#popupok").fadeOut("slow");
+					}
+	</script>
 		
