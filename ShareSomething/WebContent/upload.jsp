@@ -18,7 +18,7 @@
     <h1>Upload</h1>
 	    <form method="post" action="UploadServlet" enctype="multipart/form-data">
 	        Fichier : <input type="file" name="file" size="60" /><br><br>
-	        Catégorie : <select>
+	        Catégorie : <select name="category">
 	        <c:forEach var="item" items="${categories}">
 				<option value="${item.id}">${item.name}</option>
 			</c:forEach>

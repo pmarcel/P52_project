@@ -48,10 +48,10 @@ public class ImagesFacade extends BaseFacade {
 			res.setDescription(description);
 			res.setOwner(owner);
 			res.setLink(link);
-			category = m.find(Category.class, category.getId());
 			res.setCategory(category);
 			m.persist(res);
-			
+			System.out.println("categorie après persistance : " + res.getCategory().getName());
+
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}

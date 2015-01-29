@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import models.User;
+import facades.CategoriesFacade;
 import facades.UsersFacade;
 
 /**
@@ -128,6 +129,8 @@ public class UserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String action;
+		
+		//CategoriesFacade.InitCategories();
 		
 		try{
 		action = request.getParameterValues("action")[0].trim();

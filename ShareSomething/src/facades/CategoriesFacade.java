@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import models.Category;
+import models.User;
 
 public class CategoriesFacade extends BaseFacade{
 	@SuppressWarnings("unchecked")
@@ -30,24 +31,65 @@ public class CategoriesFacade extends BaseFacade{
 		return res;
 	}
 	
-	public static Category getById(int id) {
+	public static Category getById(long id) {
+		
 		EntityManager m = getEM();
 		Query q = null;
-		Category res = null;
+		
+		Category categ = null;
 		try {
 			q = m.createQuery("SELECT e FROM Category e WHERE e.id = :id");
 			q.setParameter("id", id);
-		} catch(Exception e) {
-			System.err.println("-- ERROR FacadeCategorie.getCategories() -- "+ e.getMessage());
+		} catch (Exception e) {
+			System.err.println(e.getMessage() + "GetById categorie");
 		} finally {
 			try {
-				res = (Category) q.getSingleResult();
+				categ = (Category) q.getSingleResult();		// Si plus d'un r�sultat (ou z�ro), login failed
 			} catch (Exception e) {
-				System.err.println(e.getMessage());
+				System.err.println("User not found");
 			}
 			m.close();
 		}
 		
-		return res;
+		System.out.println("ID recherché : " + id);
+		return categ;
+	}
+
+
+	public static void InitCategories()
+	{
+		System.out.println("Initialisation catégories");
+		EntityManager m = getEM();
+		
+		m.getTransaction().begin();
+		
+		Category c = new Category();
+		c.setName("Artistique");
+		m.persist(c);
+		
+		c = new Category();
+		c.setName("Photographique");
+		m.persist(c);
+		
+		c = new Category();
+		c.setName("Animaliste");
+		m.persist(c);
+		
+	    c = new Category();
+		c.setName("Naturiste");
+		m.persist(c);
+		
+		Category ca = new Category();
+		ca.setName("Fleurs");
+		ca.setParent(c);
+		m.persist(ca);
+		
+		ca= new Category();
+		ca.setName("Agriculture biologique");
+		ca.setParent(c);
+		m.persist(ca);
+		
+		m.getTransaction().commit();
+		m.close();
 	}
 }

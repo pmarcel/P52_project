@@ -18,8 +18,8 @@ public class Image implements Serializable {
 	private User owner;
 	private String link;
 	
-	@OneToOne
 	private Category category;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Image() {

@@ -83,12 +83,12 @@ public class UploadServlet extends HttpServlet {
         
         String imageName="";
         String description = null;
-        int category_id = 0;
+        long category_id = 0;
         
         try
         {
+        	category_id = Long.parseLong(request.getParameter("category"));
         	description = request.getParameter("description");
-        	category_id = Integer.parseInt(request.getParameter("category"));
         }
         catch(Exception e)
         {
@@ -107,7 +107,7 @@ public class UploadServlet extends HttpServlet {
         		"''" + description + "''", 							// description
         		(User)request.getSession().getAttribute("user"), // id de l'utilisateur
         		"/upload/"+filecode+imageName, 			// lien
-        		CategoriesFacade.getById(category_id));	// catégorie.
+        		CategoriesFacade.getById(category_id));	// catï¿½gorie.
         
         request.setAttribute("message", "Upload has been done successfully!");
         //getServletContext().getRequestDispatcher("/upload.jsp").forward(request, response);
