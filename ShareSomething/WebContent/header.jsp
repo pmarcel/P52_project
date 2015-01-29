@@ -152,6 +152,11 @@
 				margin-right: 1%;
 				margin-top: 1%;
 			}
+			.picblock img
+			{
+				width: 100%;
+				height: 100%;
+			}
 			h2{
 				color: white;
 				font-weight: 1.8em;
@@ -292,13 +297,13 @@ position: absolute;
 					   <li><a href="">Catégories <span>v</span></a>
 						  <ul>
 						  	<c:forEach var="item" items="${categories}">
-								<li><a href="${item.id}">${item.name}</a></li>
+								<li><a href="category?id=${item.id}">${item.name}</a></li>
 							</c:forEach>
 						  </ul>
 					   </li>
 					</ul>
 			</div>
-			<div id="search"><input type="text" id="search_input" placeholder="Artiste, mots-clés, etc...">&nbsp; <a href=""><u>Recherche avancée</u></a></div>
+			<div id="search"><input type="text" id="search_input" placeholder="Artiste, mots-clés, etc...">&nbsp; <a href="advanced_search"><u>Recherche avancée</u></a></div>
 			<div class="fear"><img src="images/fear_explode.png" alt="FEAR"></div>
 		</div>
 		<div id="header2">
@@ -306,8 +311,8 @@ position: absolute;
 			<div class="menu_element"><a href="seepics">Les plus vues <span>+</span></a></div>
 			<div class="menu_element"><a href="bestpics">Les mieux notées <span>+</span></a></div>
 			<div id="login"><a href="basket"><img width="24" height="24"  src="images/basket.svg"></a><span style="font-size: 0.8em;">44</span></div>
-			<div id="login"><a href="user?action=connect">Connexion</a>&nbsp; | &nbsp;<a href="user?action=register">Inscription</a></div>
-			<div id="login"><input type="button" value="Upload" onclick="alert('COUCOU');">&nbsp; | &nbsp;Bonjour --- !&nbsp; | &nbsp;</div>
+			<% if(session.getAttribute("login") == null) { %><div id="login"><a href="user?action=connect">Connexion</a>&nbsp; | &nbsp;<a href="user?action=register">Inscription</a></div><% } %>
+			<div id="login"><% if(session.getAttribute("login") != null) {%><input type="button" value="Upload" onclick="window.location.assign('upload');">&nbsp;&nbsp;Bonjour <%= session.getAttribute("login")%>! <input type="button" value="Deconnexion"><% } %> &nbsp;&nbsp;</div>
 		</div>
 		<div id="content">
 		

@@ -111,6 +111,7 @@ public class UserServlet extends HttpServlet {
 				//Création de la session
 				HttpSession session = request.getSession(true);    
 				session.setAttribute("user", user);
+				session.setAttribute("login", user.getLogin());
 				request.setAttribute("message", "Connection réussie");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}

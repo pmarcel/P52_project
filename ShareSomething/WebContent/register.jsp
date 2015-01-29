@@ -9,5 +9,3 @@
 		<input type="submit" value="subscribe">
 	</form>
 	<jsp:include page="footer.jsp" />
-	</body>
-</html>
