@@ -46,7 +46,6 @@ public class UploadServlet extends HttpServlet {
     	}
     	else
     	{
-    		CategoriesFacade catf = new CategoriesFacade();
     		List<Category> list_categories = CategoriesFacade.list();
 
     		request.setAttribute("categories", list_categories);
@@ -84,10 +83,12 @@ public class UploadServlet extends HttpServlet {
         
         String imageName="";
         String description = null;
+        int category = 0;
         
         try
         {
         	description = request.getParameter("description");
+        	category = Integer.parseInt(request.getParameter("category"));
         }
         catch(Exception e)
         {
@@ -98,7 +99,12 @@ public class UploadServlet extends HttpServlet {
             part.write(savePath + File.separator + filecode+imageName);
         }
  
-        ImagesFacade.Create(imageName, description, (User)request.getSession().getAttribute("user"), "/upload/"+filecode+imageName);
+        ImagesFacade.Create(imageName,					// nom de l'image 
+        		description, 							// description
+        		(User)request.getSession().getAttribute("user"), // id de l'utilisateur
+        		"/upload/"+filecode+imageName, 			// lien
+        		CategoriesFacade.getById(category));	// catégorie.
+        
         request.setAttribute("message", "Upload has been done successfully!");
         getServletContext().getRequestDispatcher("/upload.jsp").forward(request, response);
     }

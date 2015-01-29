@@ -19,10 +19,5 @@
 			<attribute name="owner.project.facets" value="jpt.jpa"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Blazkowitz/Desktop/javax.servlet.jsp.jstl-api-1.2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Blazkowitz/Desktop/javax.servlet-api-3.0.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Blazkowitz/Desktop/jstl-1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Blazkowitz/Desktop/mysql-connector-java-5.1.18.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Blazkowitz/Desktop/mysql-connector-java-5.1.0-bin.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
