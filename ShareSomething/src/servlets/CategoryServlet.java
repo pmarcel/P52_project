@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.util.List;
 
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -43,7 +44,11 @@ public class CategoryServlet extends HttpServlet {
 		CategoriesFacade catf = new CategoriesFacade();
 		List<Category> list_categories = CategoriesFacade.list();
 		
+		
+		List<Image> list_pictures = ImagesFacade.SearchByCategory(CategoriesFacade.getById((int) request.getAttribute("id")));
+		
 		request.setAttribute("categories", list_categories);
+		request.setAttribute("pictures", list_pictures);
 		request.getRequestDispatcher("category.jsp").forward(request, response);
 		
 	}

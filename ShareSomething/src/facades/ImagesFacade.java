@@ -70,7 +70,7 @@ public class ImagesFacade extends BaseFacade {
 			System.err.println(e.getMessage());
 		} finally {
 			try {
-				res = (ArrayList<Image>) q.getResultList();
+				res = q.getResultList();
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
 			}
@@ -92,7 +92,7 @@ public class ImagesFacade extends BaseFacade {
 			System.err.println(e.getMessage());
 		} finally {
 			try {
-				res = (ArrayList<Image>) q.getResultList();
+				res =  q.getResultList();
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
 			}

@@ -17,6 +17,7 @@ public class Image implements Serializable {
 	private String description;
 	private User owner;
 	private String link;
+	private Category category;
 	private static final long serialVersionUID = 1L;
 
 	public Image() {
@@ -55,6 +56,12 @@ public class Image implements Serializable {
 	}
 	public void setLink(String link) {
 		this.link = link;
+	}
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
 	}
    
 }
