@@ -12,7 +12,6 @@
     <servlet-name>Home</servlet-name>
     <url-pattern></url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>UploadServlet</servlet-name>
     <servlet-class>servlets.UploadServlet</servlet-class>
@@ -21,7 +20,6 @@
     <servlet-name>UploadServlet</servlet-name>
     <url-pattern>/upload</url-pattern>
   </servlet-mapping>
-    
   <servlet>
     <servlet-name>UserServlet</servlet-name>
     <servlet-class>servlets.UserServlet</servlet-class>
@@ -30,7 +28,6 @@
     <servlet-name>UserServlet</servlet-name>
     <url-pattern>/user</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>BasketServlet</servlet-name>
     <servlet-class>servlets.BasketServlet</servlet-class>
@@ -39,7 +36,6 @@
     <servlet-name>BasketServlet</servlet-name>
     <url-pattern>/basket</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>CategoryServlet</servlet-name>
     <servlet-class>servlets.CategoryServlet</servlet-class>
@@ -48,7 +44,6 @@
     <servlet-name>CategoryServlet</servlet-name>
     <url-pattern>/category</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>AdvancedSearchServlet</servlet-name>
     <servlet-class>servlets.AdvancedSearchServlet</servlet-class>
@@ -56,5 +51,14 @@
   <servlet-mapping>
     <servlet-name>AdvancedSearchServlet</servlet-name>
     <url-pattern>/advancedsearch</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>SearchServlet</servlet-name>
+    <servlet-class>servlets.SearchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchServlet</servlet-name>
+    <url-pattern>/search</url-pattern>
   </servlet-mapping>
 </web-app>

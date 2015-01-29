@@ -33,16 +33,12 @@ public class AdvancedSearchServlet extends HttpServlet {
      */
     public AdvancedSearchServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-				
-		navigationHelper.navigateWithCategories(request, response, "advancedsearch.jsp");
 		
 	}
 
@@ -50,15 +46,7 @@ public class AdvancedSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		List<Category> list_categories = CategoriesFacade.list();
-		PrintWriter out = response.getWriter();
-		response.setContentType("text/html");
-		for(Category c : list_categories)
-		{
-			out.println("<p>"+c.getName()+"</p>");
-		}
+		//Inutile dans cette servlet
 	}
 
 }

@@ -32,8 +32,6 @@ public class ImagesFacade extends BaseFacade {
 		return res;
 	}
 	
-	
-	
 	public static Image Create(String name, String description, User owner, String link, Category category) {
 		EntityManager m = getEM();
 		Image res = null;
@@ -68,8 +66,30 @@ public class ImagesFacade extends BaseFacade {
 		Query q = null;
 		
 		try {
-			q = m.createQuery("SELECT e FROM Image e WHERE e.name LIKE '%:name%'");
-			q.setParameter(":name", name);
+			q = m.createQuery("SELECT e FROM Image e WHERE e.name LIKE :name");
+			q.setParameter("name", "%"+name+"%");
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		} finally {
+			try {
+				res = q.getResultList();
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+			}
+		}
+		
+		return res;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<Image> SearchByDescription(String keyword) {
+		EntityManager m = getEM();
+		List<Image> res = new ArrayList<Image>();
+		Query q = null;
+		
+		try {
+			q = m.createQuery("SELECT e FROM Image e WHERE e.description LIKE :keyword");
+			q.setParameter("keyword", "%"+keyword+"%");
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		} finally {
@@ -97,6 +117,28 @@ public class ImagesFacade extends BaseFacade {
 		} finally {
 			try {
 				res =  q.getResultList();
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+			}
+		}
+		
+		return res;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<Image> SearchByOwner(User user) {
+		EntityManager m = getEM();
+		List<Image> res = new ArrayList<Image>();
+		Query q = null;
+		
+		try {
+			q = m.createQuery("SELECT e FROM Image e WHERE e.owner = :user");
+			q.setParameter("user", user);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		} finally {
+			try {
+				res = q.getResultList();
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
 			}
