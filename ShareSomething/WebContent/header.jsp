@@ -182,7 +182,7 @@
 			.popup-ok {
 				display: block;
 				position: absolute;
-				top: 12%;
+				top: 15%;
 				left: 88%;
 				width: 10%;
 				height: 3%;
@@ -200,13 +200,13 @@
 			.popup-error {
 				display: block;
 				position: absolute;
-				top: 12%;
-				left: 88%;
+				top: 15%;
+				left: 75%;
 				width: 10%;
 				height: 3%;
 				padding-bottom: 16px;
 				border: 1px solid black;
-				background-color: #AAAAAA;
+				background-color: #FF5757;
 				overflow: auto;
 				-webkit-border-radius: 4px;
 				-moz-border-radius: 4px;
@@ -316,11 +316,11 @@ position: absolute;
 		</div>
 		<div id="content">
 		
-	<div id="popuperr" class="popup-erreur"><%=request.getAttribute("error") %></div> 
+			<div id="popuperr" class="popup-error"><%=request.getAttribute("error") %></div> 
 				<script>
-					setTimeout('cacheDiv()', 2000);
+					setTimeout('cacheDiverr()', 2000);
 							 
-					function cacheDiv() {
+					function cacheDiverr() {
 						 $("#popuperr").fadeOut("slow");
 					}
 				</script>		
@@ -328,12 +328,9 @@ position: absolute;
 			<div id="popupok" class="popup-ok"> <%=request.getAttribute("message") %></div> 
 				<script>
 					setTimeout('cacheDiv()', 3000);
-			 
-			function cacheDiv() {
-				 $("#popup").fadeOut("slow");
-			}
+
 					function cacheDiv() {
-						 $("#popupok").fadeOut("slow");
+						$("#popupok").fadeOut("slow");
 					}
-	</script>
+				</script>
 		

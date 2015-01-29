@@ -51,7 +51,6 @@ public class CategoriesFacade extends BaseFacade{
 			m.close();
 		}
 		
-		System.out.println("ID recherché : " + id);
 		return categ;
 	}
 

@@ -110,7 +110,7 @@ public class UploadServlet extends HttpServlet {
         		CategoriesFacade.getById(category_id));	// cat�gorie.
         
         request.setAttribute("message", "Upload has been done successfully!");
-        //getServletContext().getRequestDispatcher("/upload.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/upload.jsp").forward(request, response);
     }
  
     /**
