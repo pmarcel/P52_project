@@ -35,7 +35,7 @@ public class CategoriesFacade extends BaseFacade{
 		Query q = null;
 		Category res = null;
 		try {
-			q = m.createQuery("SELECT e FROM Category e WHERE id = :id");
+			q = m.createQuery("SELECT e FROM Category e WHERE e.id = :id");
 			q.setParameter("id", id);
 		} catch(Exception e) {
 			System.err.println("-- ERROR FacadeCategorie.getCategories() -- "+ e.getMessage());

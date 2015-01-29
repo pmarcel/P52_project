@@ -44,12 +44,15 @@ public class CategoryServlet extends HttpServlet {
 		CategoriesFacade catf = new CategoriesFacade();
 		List<Category> list_categories = CategoriesFacade.list();
 		
+		if(request.getParameterValues("id")[0] != null)
+		{
+		List<Image> list_pictures = ImagesFacade.SearchByCategory(CategoriesFacade.getById(Integer.parseInt(request.getParameterValues("id")[0])));
 		
-		List<Image> list_pictures = ImagesFacade.SearchByCategory(CategoriesFacade.getById((int) request.getAttribute("id")));
-		
+		System.out.println(list_pictures.size());
 		request.setAttribute("categories", list_categories);
 		request.setAttribute("pictures", list_pictures);
 		request.getRequestDispatcher("category.jsp").forward(request, response);
+		}
 		
 	}
 
