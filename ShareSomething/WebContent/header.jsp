@@ -303,7 +303,7 @@ position: absolute;
 					   </li>
 					</ul>
 			</div>
-			<div id="search"><input type="text" id="search_input" placeholder="Artiste, mots-clés, etc...">&nbsp; <a href="advanced_search"><u>Recherche avancée</u></a></div>
+			<div id="search"><input type="text" id="search_input" placeholder="Artiste, mots-clés, etc...">&nbsp; <a href="advancedsearch"><u>Recherche avancée</u></a></div>
 			<div class="fear"><img src="images/fear_explode.png" alt="FEAR"></div>
 		</div>
 		<div id="header2">
