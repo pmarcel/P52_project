@@ -93,7 +93,7 @@ public class UserServlet extends HttpServlet {
 					return;
 				}
 				request.getSession().setAttribute("user", user);
-				session.setAttribute("login", user.getLogin());
+				request.getSession().setAttribute("login", user.getLogin());
 				request.setAttribute("message", "Inscription réussie");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
