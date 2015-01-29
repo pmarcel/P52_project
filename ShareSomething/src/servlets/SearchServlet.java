@@ -60,13 +60,11 @@ public class SearchServlet extends HttpServlet {
 		
 		if(owner != null)
 		{
-			System.out.println("By owner");
 			results = ImagesFacade.SearchByOwner(owner);
 		}
 
 		if(results.size() == 0) // Si la recherche par user donne rien, alors on fait une recherche par critère
 		{
-			System.out.println("By criteria");
 			results = ImagesFacade.SearchByDescription(criteria);
 		}
 		

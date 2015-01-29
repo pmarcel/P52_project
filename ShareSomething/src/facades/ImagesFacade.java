@@ -161,4 +161,27 @@ public class ImagesFacade extends BaseFacade {
 		
 		return res;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<Image> SearchByUserAndKeyword(User user, String keyword) {
+		EntityManager m = getEM();
+		List<Image> res = new ArrayList<Image>();
+		Query q = null;
+		
+		try {
+			q = m.createQuery("SELECT e FROM Image e WHERE e.owner = :user AND e.description LIKE :keyword");
+			q.setParameter("user", user);
+			q.setParameter("keyword", "%"+keyword+"%");
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		} finally {
+			try {
+				res = q.getResultList();
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+			}
+		}
+		
+		return res;
+	}
 }
