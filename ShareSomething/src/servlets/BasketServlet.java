@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.util.List;
 
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -25,35 +26,39 @@ import facades.*;
 @WebServlet("/BasketServlet")
 public class BasketServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public BasketServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		CategoriesFacade catf = new CategoriesFacade();
-		List<Category> list_categories = CategoriesFacade.list();
-		
-		request.setAttribute("categories", list_categories);
-		request.getRequestDispatcher("basket.jsp").forward(request, response);
-		
+		if (request.getAttribute("action") == "delete") {
+			long id = (long) request.getAttribute("image");
+			
+			((Cart) request.getSession().getAttribute("cart")).removeImageById(id);
+
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		} else if (request.getAttribute("action") == "add") {
+			System.out.println("add");
+			long id = (long) request.getAttribute("image");
+			
+			((Cart) request.getSession().getAttribute("cart")).removeImageById(id);
+			
+			request.getRequestDispatcher("basket.jsp").forward(request, response);
+		} else {
+			List<Category> list_categories = CategoriesFacade.list();
+			request.setAttribute("categories", list_categories);
+					
+			List<Image> list_images = ((Cart) request.getSession().getAttribute("cart")).list();
+			request.setAttribute("images", list_images);
+			
+			request.getRequestDispatcher("basket.jsp").forward(request, response);
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
 		new CategoriesFacade();
 		List<Category> list_categories = CategoriesFacade.list();
 		PrintWriter out = response.getWriter();

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import models.Cart;
 import models.User;
 import facades.CategoriesFacade;
 import facades.UsersFacade;
@@ -94,6 +95,7 @@ public class UserServlet extends HttpServlet {
 				}
 				request.getSession().setAttribute("user", user);
 				request.getSession().setAttribute("login", user.getLogin());
+				request.getSession().setAttribute("cart", new Cart());
 				request.setAttribute("message", "Inscription réussie");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
@@ -114,6 +116,7 @@ public class UserServlet extends HttpServlet {
 				HttpSession session = request.getSession(true);    
 				session.setAttribute("user", user);
 				session.setAttribute("login", user.getLogin());
+				session.setAttribute("cart", new Cart());
 				request.setAttribute("message", "Connection réussie");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}

@@ -13,9 +13,12 @@
 			<div id="basket">
 				<div id="basket_items">
 					<ul>
-						<li>IMG1</li>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="x"><br>
-						<li>IMG2</li>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="x"><br>
-						<li>IMG3</li>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="x"><br>
+						<c:forEach var="item" items="${images}">
+							<li>
+								${item.name}<a href="basket?action=delete&image=${item.id}"><input type="button" value="X" style="float: right"></a><br/>
+								<img src="${item.link}" alt="${item.name}"/>
+							</li>
+						</c:forEach> 
 					</ul>
 				</div>
 				<a href="basket?download">Télécharger</a>
