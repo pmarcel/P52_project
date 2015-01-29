@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.util.List;
 
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -43,13 +44,12 @@ public class HomeServlet extends HttpServlet {
 		CategoriesFacade catf = new CategoriesFacade();
 		List<Category> list_categories = CategoriesFacade.list();
 		
-		/*PrintWriter out = response.getWriter();
+		ImagesFacade imgf = new ImagesFacade();
+		List<Image> list_pictures = ImagesFacade.getImages();
+		
 
-		for(Category c : list_categories)
-		{
-			out.println("<p>"+c.getName()+"</p>");
-		}*/
 		request.setAttribute("categories", list_categories);
+		request.setAttribute("pictures", list_pictures);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 		
 	}
