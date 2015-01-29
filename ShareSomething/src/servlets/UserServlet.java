@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import models.Cart;
+import Helpers.navigationHelper;
 import models.User;
 import facades.CategoriesFacade;
 import facades.UsersFacade;
@@ -56,19 +57,19 @@ public class UserServlet extends HttpServlet {
 		//Redirection en cas de mauvais appel
 		if(action == null){
 			request.setAttribute("error", "Erreur lors de l'appel de la page ! Action == null");
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			navigationHelper.navigateWithCategoriesAndAllImages(request, response, "index.jsp");
 			return;
 		 }
 		else if(action.equals("register") && stop)
 		{
 			request.setAttribute("error", "Erreur lors de la récupération des paramètres");
-			request.getRequestDispatcher("register.jsp").forward(request, response);
+			navigationHelper.navigateWithCategories(request, response, "register.jsp");
 			return;
 		}
 		else if(stop)
 		{
 			request.setAttribute("error", "Erreur lors de la récupération des paramètres");
-			request.getRequestDispatcher("login.jsp").forward(request,response);
+			navigationHelper.navigateWithCategories(request, response, "login.jsp");
 			return;
 		}
 		
@@ -80,7 +81,7 @@ public class UserServlet extends HttpServlet {
 			if(isConnected(request.getSession(false)))
 			{
 				request.setAttribute("error", "Erreur : Vous êtes déjà inscrit !");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				navigationHelper.navigateWithCategoriesAndAllImages(request, response, "index.jsp");
 				return;
 			}
 			else
@@ -90,14 +91,14 @@ public class UserServlet extends HttpServlet {
 				if(user == null)
 				{
 					request.setAttribute("error", "Erreur : Ce login est déja attribué !");
-					request.getRequestDispatcher("register.jsp").forward(request, response);
+					navigationHelper.navigateWithCategories(request, response, "register.jsp");
 					return;
 				}
 				request.getSession().setAttribute("user", user);
 				request.getSession().setAttribute("login", user.getLogin());
 				request.getSession().setAttribute("cart", new Cart());
 				request.setAttribute("message", "Inscription réussie");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				navigationHelper.navigateWithCategoriesAndAllImages(request, response, "index.jsp");
 			}
 		}
 		//Connexion
@@ -108,7 +109,7 @@ public class UserServlet extends HttpServlet {
 			if(isConnected(request.getSession(false)))
 			{
 				request.setAttribute("error", "Erreur : Vous êtes déjà connecté !");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				navigationHelper.navigateWithCategoriesAndAllImages(request, response, "index.jsp");
 			}
 			else if(user !=null)
 			{
@@ -118,13 +119,13 @@ public class UserServlet extends HttpServlet {
 				session.setAttribute("login", user.getLogin());
 				session.setAttribute("cart", new Cart());
 				request.setAttribute("message", "Connection réussie");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				navigationHelper.navigateWithCategoriesAndAllImages(request, response, "index.jsp");
 			}
 			else
 			{
 				//redirection avec erreur
 				request.setAttribute("error", "Erreur : Login ou mot de passe incorrect");
-				request.getRequestDispatcher("login.jsp").forward(request, response);
+				navigationHelper.navigateWithCategories(request, response, "login.jsp");
 			}
 		}
 		
@@ -147,25 +148,25 @@ public class UserServlet extends HttpServlet {
 		if(isConnected(request.getSession(false))&&!action.equals("disconnect"))
 		{
 			request.setAttribute("error", "Erreur : Vous êtes déjà connecté !");
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			navigationHelper.navigateWithCategoriesAndAllImages(request, response, "index.jsp");
 			return;
 		}
 		
 		if( action.equals("register"))
-			request.getRequestDispatcher("register.jsp").forward(request, response);
+			navigationHelper.navigateWithCategories(request, response, "register.jsp");
 		else if(action.equals("connect"))
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			navigationHelper.navigateWithCategories(request, response, "login.jsp");
 		else if(action.equals("disconnect"))
 		{
 			HttpSession session = request.getSession(true);    
 			session.invalidate();
 			request.setAttribute("message", "Déconnexion réussie !");
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			navigationHelper.navigateWithCategoriesAndAllImages(request, response, "index.jsp");
 		}
 		else
 		{
 			request.setAttribute("error", "Erreur : action invalide ! "+action);
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			navigationHelper.navigateWithCategoriesAndAllImages(request, response, "index.jsp");
 		}
 			
 		
