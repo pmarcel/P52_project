@@ -5,6 +5,7 @@ import java.io.IOException;
  
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -14,7 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import models.Category;
 import models.User;
+import facades.CategoriesFacade;
 import facades.ImagesFacade;
  
 @WebServlet("/UploadServlet")
@@ -43,6 +46,10 @@ public class UploadServlet extends HttpServlet {
     	}
     	else
     	{
+    		CategoriesFacade catf = new CategoriesFacade();
+    		List<Category> list_categories = CategoriesFacade.list();
+
+    		request.setAttribute("categories", list_categories);
     		request.getRequestDispatcher("upload.jsp").forward(request, response);
     	}
 	}
@@ -60,6 +67,8 @@ public class UploadServlet extends HttpServlet {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 			return;
     	}
+    	
+    
     	
         // gets absolute path of the web application
         String appPath = request.getServletContext().getRealPath("");

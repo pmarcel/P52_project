@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<jsp:include page="header.jsp" />
 	<style>
 		#upload_form
@@ -17,7 +18,11 @@
     <h1>Upload</h1>
 	    <form method="post" action="UploadServlet" enctype="multipart/form-data">
 	        Fichier : <input type="file" name="file" size="60" /><br><br>
-	        Catégorie : <select><option>COUCOU</option></select><br>
+	        Catégorie : <select>
+	        <c:forEach var="item" items="${categories}">
+				<option value="${item.id}">${item.name}</option>
+			</c:forEach>
+	        </select><br>
 	        Description :<br><textarea rows="4" cols="50" name ="description"></textarea><br>
 	        <input type="submit" value="Envoyer">
 	    </form>

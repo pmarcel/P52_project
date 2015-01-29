@@ -13,16 +13,16 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/Blazkowitz/Downloads/mysql-connector-java-5.1.34/mysql-connector-java-5.1.34-bin.jar"/>
-	<classpathentry kind="lib" path="C:/javaee-api-7.0.jar"/>
-	<classpathentry kind="lib" path="C:/javax.servlet.jsp.jstl-api-1.2.1.jar"/>
-	<classpathentry kind="lib" path="C:/javax.servlet-api-3.0.1.jar"/>
-	<classpathentry kind="lib" path="C:/jstl-1.2.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/EclipseLink 2.5.2">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 			<attribute name="owner.project.facets" value="jpt.jpa"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Blazkowitz/Desktop/javax.servlet.jsp.jstl-api-1.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Blazkowitz/Desktop/javax.servlet-api-3.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Blazkowitz/Desktop/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Blazkowitz/Desktop/mysql-connector-java-5.1.0-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Blazkowitz/Desktop/mysql-connector-java-5.1.18.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
