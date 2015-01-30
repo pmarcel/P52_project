@@ -9,12 +9,12 @@
 			#upload_form
 			{
 				color: white;
-					margin-top: 1%;
-					margin-bottom: 1%;
-					text-align: center;
-					width: auto;
-					margin-left: 33%;
-					margin-right: 33%;
+				margin-top: 1%;
+				margin-bottom: 1%;
+				text-align: center;
+				width: auto;
+				margin-left: 33%;
+				margin-right: 33%;
 			}
 		</style>
 		<div id="upload_form">
