@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import models.Category;
-import models.User;
 
 public class CategoriesFacade extends BaseFacade{
 	@SuppressWarnings("unchecked")

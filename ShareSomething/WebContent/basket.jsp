@@ -15,8 +15,8 @@
 					<ul>
 						<c:forEach var="item" items="${images}">
 							<li>
-								${item.name}<a href="basket?action=delete&image=${item.id}"><input type="button" value="X" style="float: right"></a><br/>
-								<img src="${item.link}" alt="${item.name}"/>
+								${item.name}<a href="basket?action=delete&image=${item.id}"><input type="button" value="X" style="float: right" /></a><br/>
+								<img src="${item.link}" alt="${item.name}" />${item.id}
 							</li>
 						</c:forEach> 
 					</ul>

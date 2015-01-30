@@ -8,6 +8,8 @@ import facades.ImagesFacade;
 public class Cart {
 	ArrayList<Image> images = new ArrayList<Image>();
 	
+	public Cart() {}
+	
 	public void addImage(long id) {
 		images.add(ImagesFacade.searchById(id));
 	}

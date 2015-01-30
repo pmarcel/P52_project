@@ -170,14 +170,13 @@ public class ImagesFacade extends BaseFacade {
 		return res;
 	}
 
-	@SuppressWarnings("unchecked")
 	public static Image searchById(long id) {
 		EntityManager m = getEM();
 		Image res = null;
 		Query q = null;
 		
 		try {
-			q = m.createQuery("SELECT e FROM Image e WHERE id = :id");
+			q = m.createQuery("SELECT e FROM Image e WHERE e.id = :id");
 			q.setParameter("id", id);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());

@@ -1,9 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import models.Cart;
 import Helpers.navigationHelper;
 import models.User;
-import facades.CategoriesFacade;
 import facades.UsersFacade;
 
 /**
@@ -62,13 +58,13 @@ public class UserServlet extends HttpServlet {
 		 }
 		else if(action.equals("register") && stop)
 		{
-			request.setAttribute("error", "Erreur lors de la rÃ©cupÃ©ration des paramÃ¨tres");
+			request.setAttribute("error", "Erreur lors de la récupération des paramètres");
 			navigationHelper.navigateWithCategories(request, response, "register.jsp");
 			return;
 		}
 		else if(stop)
 		{
-			request.setAttribute("error", "Erreur lors de la rÃ©cupÃ©ration des paramÃ¨tres");
+			request.setAttribute("error", "Erreur lors de la récupération des paramètres");
 			navigationHelper.navigateWithCategories(request, response, "login.jsp");
 			return;
 		}
@@ -80,7 +76,7 @@ public class UserServlet extends HttpServlet {
 		{
 			if(isConnected(request.getSession(false)))
 			{
-				request.setAttribute("error", "Erreur : Vous Ãªtes dÃ©jÃ  inscrit !");
+				request.setAttribute("error", "Erreur : Vous êtes déjà connecté !");
 				navigationHelper.navigateWithCategoriesAndAllImages(request, response, "index.jsp");
 				return;
 			}
@@ -90,14 +86,14 @@ public class UserServlet extends HttpServlet {
 				
 				if(user == null)
 				{
-					request.setAttribute("error", "Erreur : Ce login est dÃ©ja attribuÃ© !");
+					request.setAttribute("error", "Erreur : Ce login est déjà attribué !");
 					navigationHelper.navigateWithCategories(request, response, "register.jsp");
 					return;
 				}
 				request.getSession().setAttribute("user", user);
 				request.getSession().setAttribute("login", user.getLogin());
 				request.getSession().setAttribute("cart", new Cart());
-				request.setAttribute("message", "Inscription rÃ©ussie");
+				request.setAttribute("message", "Inscription réussie");
 				navigationHelper.navigateWithCategoriesAndAllImages(request, response, "index.jsp");
 			}
 		}
@@ -108,7 +104,7 @@ public class UserServlet extends HttpServlet {
 			
 			if(isConnected(request.getSession(false)))
 			{
-				request.setAttribute("error", "Erreur : Vous Ãªtes dÃ©jÃ  connectÃ© !");
+				request.setAttribute("error", "Erreur : Vous êtes déjà  connecté !");
 				navigationHelper.navigateWithCategoriesAndAllImages(request, response, "index.jsp");
 			}
 			else if(user !=null)
@@ -118,7 +114,7 @@ public class UserServlet extends HttpServlet {
 				session.setAttribute("user", user);
 				session.setAttribute("login", user.getLogin());
 				session.setAttribute("cart", new Cart());
-				request.setAttribute("message", "Connection rÃ©ussie");
+				request.setAttribute("message", "Connection réussie");
 				navigationHelper.navigateWithCategoriesAndAllImages(request, response, "index.jsp");
 			}
 			else
@@ -147,7 +143,7 @@ public class UserServlet extends HttpServlet {
 				
 		if(isConnected(request.getSession(false))&&!action.equals("disconnect"))
 		{
-			request.setAttribute("error", "Erreur : Vous Ãªtes dÃ©jÃ  connectÃ© !");
+			request.setAttribute("error", "Erreur : Vous êtes déjà connecté !");
 			navigationHelper.navigateWithCategoriesAndAllImages(request, response, "index.jsp");
 			return;
 		}
@@ -160,7 +156,7 @@ public class UserServlet extends HttpServlet {
 		{
 			HttpSession session = request.getSession(true);    
 			session.invalidate();
-			request.setAttribute("message", "DÃ©connexion rÃ©ussie !");
+			request.setAttribute("message", "Déconnexion réussie !");
 			navigationHelper.navigateWithCategoriesAndAllImages(request, response, "index.jsp");
 		}
 		else

@@ -2,15 +2,11 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.sql.DriverManager;
 import java.util.List;
 
 
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,28 +28,41 @@ public class BasketServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (request.getParameter("action") == "delete") {
-			long id = Long.parseLong(request.getParameter("image"));
-			
-			((Cart) request.getSession().getAttribute("cart")).removeImageById(id);
-
-			request.getRequestDispatcher("index.jsp").forward(request, response);
-		} else if (request.getParameter("action") == "add") {
-			System.out.println("add");
-			long id = Long.parseLong(request.getParameter("image"));
-			
-			((Cart) request.getSession().getAttribute("cart")).addImage(id);
-			
-			request.getRequestDispatcher("basket.jsp").forward(request, response);
-		} else if (UserServlet.isConnected(request.getSession())) {
-			List<Category> list_categories = CategoriesFacade.list();
-			request.setAttribute("categories", list_categories);
-			
-			
-			List<Image> list_images = ((Cart) request.getSession().getAttribute("cart")).list();
-			request.setAttribute("images", list_images);
-			
-			request.getRequestDispatcher("basket.jsp").forward(request, response);
+		if (UserServlet.isConnected(request.getSession())) {
+			if (request.getParameter("action").equals("delete")) {
+				long id = 0;
+				try {
+					id = Long.parseLong(request.getParameter("image"));
+				} catch (Exception e) {
+					System.err.println(e.getMessage());
+				}
+				
+				((Cart) request.getSession().getAttribute("cart")).removeImageById(id);
+	
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			} else if (request.getParameter("action").equals("add")) {
+				long id = 0;
+				try {
+					id = Long.parseLong(request.getParameter("image"));
+				} catch (Exception e) {
+					System.err.println(e.getMessage());
+				}
+				
+				Cart c = (Cart) request.getSession().getAttribute("cart");
+				System.err.println(c);
+				c.addImage(id);
+				
+				request.getRequestDispatcher("basket.jsp").forward(request, response);
+			} else {
+				List<Category> list_categories = CategoriesFacade.list();
+				request.setAttribute("categories", list_categories);
+				
+				
+				List<Image> list_images = ((Cart) request.getSession().getAttribute("cart")).list();
+				request.setAttribute("images", list_images);
+				
+				request.getRequestDispatcher("basket.jsp").forward(request, response);
+			}
 		} else {
 			navigationHelper.navigateWithCategoriesAndAllImages(request, response, "index.jsp");
 		}
