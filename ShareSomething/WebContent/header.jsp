@@ -304,7 +304,7 @@ position: absolute;
 					</ul>
 			</div>
 			<div id="search">
-			<form action="advancedsearch" method="post">
+			<form action="search" method="post">
 				<input type="text" name="search_input" placeholder="Artiste, mot-clé"/>&nbsp; 
 				<input type="submit" value="Rechercher"/>
 			</form>
